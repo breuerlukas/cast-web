@@ -193,7 +193,8 @@ const findShadowRoot = element => {
   return findShadowRoot(element.parentNode);
 };
 
-const noop = () => {};
+const noop = () => {
+};
 /**
  * Trick to restart an element's animation
  *
@@ -273,8 +274,8 @@ const executeAfterTransition = (callback, transitionElement, waitForTransition =
   let called = false;
 
   const handler = ({
-    target
-  }) => {
+                     target
+                   }) => {
     if (target !== transitionElement) {
       return;
     }
@@ -341,6 +342,7 @@ const customEvents = {
   mouseleave: 'mouseout'
 };
 const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
+
 /**
  * Private methods
  */
@@ -751,7 +753,8 @@ class Config {
   _mergeConfigObj(config, element) {
     const jsonConfig = isElement(element) ? Manipulator.getDataAttribute(element, 'config') : {}; // try to parse
 
-    return { ...this.constructor.Default,
+    return {
+      ...this.constructor.Default,
       ...(typeof jsonConfig === 'object' ? jsonConfig : {}),
       ...(isElement(element) ? Manipulator.getDataAttributes(element) : {}),
       ...(typeof config === 'object' ? config : {})
@@ -783,6 +786,7 @@ class Config {
  */
 
 const VERSION = '5.2.3';
+
 /**
  * Class definition
  */
@@ -894,6 +898,7 @@ const EVENT_CLOSE = `close${EVENT_KEY$b}`;
 const EVENT_CLOSED = `closed${EVENT_KEY$b}`;
 const CLASS_NAME_FADE$5 = 'fade';
 const CLASS_NAME_SHOW$8 = 'show';
+
 /**
  * Class definition
  */
@@ -945,6 +950,7 @@ class Alert extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -974,6 +980,7 @@ const DATA_API_KEY$6 = '.data-api';
 const CLASS_NAME_ACTIVE$3 = 'active';
 const SELECTOR_DATA_TOGGLE$5 = '[data-bs-toggle="button"]';
 const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$a}${DATA_API_KEY$6}`;
+
 /**
  * Class definition
  */
@@ -1002,6 +1009,7 @@ class Button extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -1121,6 +1129,7 @@ const DefaultType$c = {
   leftCallback: '(function|null)',
   rightCallback: '(function|null)'
 };
+
 /**
  * Class definition
  */
@@ -1291,6 +1300,7 @@ const DefaultType$b = {
   touch: 'boolean',
   wrap: 'boolean'
 };
+
 /**
  * Class definition
  */
@@ -1625,6 +1635,7 @@ class Carousel extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -1711,6 +1722,7 @@ const DefaultType$a = {
   parent: '(null|element)',
   toggle: 'boolean'
 };
+
 /**
  * Class definition
  */
@@ -1938,6 +1950,7 @@ class Collapse extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -2027,6 +2040,7 @@ const DefaultType$9 = {
   popperConfig: '(null|object|function)',
   reference: '(string|element|object)'
 };
+
 /**
  * Class definition
  */
@@ -2264,15 +2278,16 @@ class Dropdown extends BaseComponent {
       }];
     }
 
-    return { ...defaultBsPopperConfig,
+    return {
+      ...defaultBsPopperConfig,
       ...(typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
     };
   }
 
   _selectMenuItem({
-    key,
-    target
-  }) {
+                    key,
+                    target
+                  }) {
     const items = SelectorEngine.find(SELECTOR_VISIBLE_ITEMS, this._menu).filter(element => isVisible(element));
 
     if (!items.length) {
@@ -2377,6 +2392,7 @@ class Dropdown extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -2410,6 +2426,7 @@ const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-to
 const SELECTOR_STICKY_CONTENT = '.sticky-top';
 const PROPERTY_PADDING = 'padding-right';
 const PROPERTY_MARGIN = 'margin-right';
+
 /**
  * Class definition
  */
@@ -2545,6 +2562,7 @@ const DefaultType$8 = {
   isVisible: 'boolean',
   rootElement: '(element|string)'
 };
+
 /**
  * Class definition
  */
@@ -2688,6 +2706,7 @@ const DefaultType$7 = {
   autofocus: 'boolean',
   trapElement: 'element'
 };
+
 /**
  * Class definition
  */
@@ -2813,6 +2832,7 @@ const DefaultType$6 = {
   focus: 'boolean',
   keyboard: 'boolean'
 };
+
 /**
  * Class definition
  */
@@ -3059,6 +3079,7 @@ class Modal extends BaseComponent {
 
     this._element.focus();
   }
+
   /**
    * The following methods are used to handle overflowing modals
    */
@@ -3105,6 +3126,7 @@ class Modal extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -3186,6 +3208,7 @@ const DefaultType$5 = {
   keyboard: 'boolean',
   scroll: 'boolean'
 };
+
 /**
  * Class definition
  */
@@ -3369,6 +3392,7 @@ class Offcanvas extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -3491,6 +3515,7 @@ const DefaultAllowlist = {
   u: [],
   ul: []
 };
+
 function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
   if (!unsafeHtml.length) {
     return unsafeHtml;
@@ -3559,6 +3584,7 @@ const DefaultContentType = {
   entry: '(string|element|function|null)',
   selector: '(string|element)'
 };
+
 /**
  * Class definition
  */
@@ -3594,7 +3620,8 @@ class TemplateFactory extends Config {
   changeContent(content) {
     this._checkContent(content);
 
-    this._config.content = { ...this._config.content,
+    this._config.content = {
+      ...this._config.content,
       ...content
     };
     return this;
@@ -3760,6 +3787,7 @@ const DefaultType$3 = {
   title: '(string|element|function)',
   trigger: 'string'
 };
+
 /**
  * Class definition
  */
@@ -4001,7 +4029,8 @@ class Tooltip extends BaseComponent {
     if (this._templateFactory) {
       this._templateFactory.changeContent(content);
     } else {
-      this._templateFactory = new TemplateFactory({ ...this._config,
+      this._templateFactory = new TemplateFactory({
+        ...this._config,
         // the `content` var has to be after `this._config`
         // to override config.content in case of popover
         content,
@@ -4095,7 +4124,8 @@ class Tooltip extends BaseComponent {
         }
       }]
     };
-    return { ...defaultBsPopperConfig,
+    return {
+      ...defaultBsPopperConfig,
       ...(typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
     };
   }
@@ -4203,7 +4233,8 @@ class Tooltip extends BaseComponent {
       }
     }
 
-    config = { ...dataAttributes,
+    config = {
+      ...dataAttributes,
       ...(typeof config === 'object' && config ? config : {})
     };
     config = this._mergeConfigObj(config);
@@ -4283,6 +4314,7 @@ class Tooltip extends BaseComponent {
   }
 
 }
+
 /**
  * jQuery
  */
@@ -4303,16 +4335,19 @@ defineJQueryPlugin(Tooltip);
 const NAME$3 = 'popover';
 const SELECTOR_TITLE = '.popover-header';
 const SELECTOR_CONTENT = '.popover-body';
-const Default$2 = { ...Tooltip.Default,
+const Default$2 = {
+  ...Tooltip.Default,
   content: '',
   offset: [0, 8],
   placement: 'right',
   template: '<div class="popover" role="tooltip">' + '<div class="popover-arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div>' + '</div>',
   trigger: 'click'
 };
-const DefaultType$2 = { ...Tooltip.DefaultType,
+const DefaultType$2 = {
+  ...Tooltip.DefaultType,
   content: '(null|string|element|function)'
 };
+
 /**
  * Class definition
  */
@@ -4366,6 +4401,7 @@ class Popover extends Tooltip {
   }
 
 }
+
 /**
  * jQuery
  */
@@ -4417,6 +4453,7 @@ const DefaultType$1 = {
   target: 'element',
   threshold: 'array'
 };
+
 /**
  * Class definition
  */
@@ -4648,6 +4685,7 @@ class ScrollSpy extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -4702,6 +4740,7 @@ const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [
 
 const SELECTOR_INNER_ELEM = `${SELECTOR_INNER}, ${SELECTOR_DATA_TOGGLE}`;
 const SELECTOR_DATA_TOGGLE_ACTIVE = `.${CLASS_NAME_ACTIVE}[data-bs-toggle="tab"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="pill"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="list"]`;
+
 /**
  * Class definition
  */
@@ -4946,6 +4985,7 @@ class Tab extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -5013,6 +5053,7 @@ const Default = {
   autohide: true,
   delay: 5000
 };
+
 /**
  * Class definition
  */
@@ -5129,18 +5170,16 @@ class Toast extends BaseComponent {
   _onInteraction(event, isInteracting) {
     switch (event.type) {
       case 'mouseover':
-      case 'mouseout':
-        {
-          this._hasMouseInteraction = isInteracting;
-          break;
-        }
+      case 'mouseout': {
+        this._hasMouseInteraction = isInteracting;
+        break;
+      }
 
       case 'focusin':
-      case 'focusout':
-        {
-          this._hasKeyboardInteraction = isInteracting;
-          break;
-        }
+      case 'focusout': {
+        this._hasKeyboardInteraction = isInteracting;
+        break;
+      }
     }
 
     if (isInteracting) {
@@ -5186,6 +5225,7 @@ class Toast extends BaseComponent {
   }
 
 }
+
 /**
  * Data API implementation
  */
@@ -5198,5 +5238,18 @@ enableDismissTrigger(Toast);
 
 defineJQueryPlugin(Toast);
 
-export { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };
+export {
+  Alert,
+  Button,
+  Carousel,
+  Collapse,
+  Dropdown,
+  Modal,
+  Offcanvas,
+  Popover,
+  ScrollSpy,
+  Tab,
+  Toast,
+  Tooltip
+};
 //# sourceMappingURL=bootstrap.esm.js.map

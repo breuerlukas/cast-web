@@ -1,29 +1,30 @@
 form {
-    width: 30%;
-    text-align: center;
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
+  width: 30%;
+  text-align: center;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #castLabel {
-    font-size: 10vw;
-    color: rgba(6, 35, 44, 0.73);
-    font-family: Gabriola;
-    font-weight: bold;
+  font-size: 10vw;
+  color: rgba(6, 35, 44, 0.73);
+  font-family: Gabriola;
+  font-weight: bold;
 }
 
 #loginButton {
-    margin-top: 5%;
-    width: 50%;
+  margin-top: 5%;
+  width: 50%;
 }
 
 @media (max-width: 400px) {
-    form {
-        width: 80%;
-        margin-top: 40%;
-    }
-    #loginButton {
-        width: 80%;
-    }
+  form {
+    width: 80%;
+    margin-top: 40%;
+  }
+
+  #loginButton {
+    width: 80%;
+  }
 }
