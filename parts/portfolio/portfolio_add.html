@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <div id="portfolio-add-wrapper">
+    <a>Stock</a></br>
+    <input id="portfolio-stock" name="portfolio-stock"></br></br>
+  </div>
+</body>
+</html>
+
+<script>
+  $(document).ready(function() {
+    if (window.sessionStorage.getItem("portfolioStock") != null) {
+      document.getElementById("portfolio-stock").value = window.sessionStorage.getItem("portfolioStock");
+      window.sessionStorage.removeItem("portfolioStock");
+    }
+  });
+</script>
