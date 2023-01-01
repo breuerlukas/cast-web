@@ -30,6 +30,7 @@
   <link rel=icon type="image/png" href="img/logo.png" sizes="32x32">
   <link rel="stylesheet" href="../css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/loader.css">
   <link rel="stylesheet" href="../css/<?php echo $pagePath[count($pagePath) - 1];?>.css">
   <?php
     if ($hasSubPage) {
