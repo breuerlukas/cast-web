@@ -33,16 +33,3 @@ body::-webkit-scrollbar-thumb {
   margin-left: .1rem;
   margin-right: .1rem;
 }
-
-@media (max-width: 400px) {
-  #navbar-school-regular {
-    display: none;
-  }
-}
-
-
-@media (min-width: 400px) {
-  #navbar-school-small {
-    display: none;
-  }
-}
