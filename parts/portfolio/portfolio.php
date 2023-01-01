@@ -93,6 +93,14 @@
 
   function displayStock(stockId, stockName, stockTrades) {
     var entry = document.createElement('li');
+    entry.addEventListener("click", event => {
+      var targetClasses = event.target.classList;
+      if (targetClasses.contains("portfolio-settings") || targetClasses.contains("fa")) {
+        return;
+      }
+      window.sessionStorage.setItem("stock", stockName);
+      window.location.href = "/?page=stock/";
+    });
     var stockDiv = document.createElement("div");
     var stockSpan = document.createElement("span");
     stockSpan.innerText = stockName;

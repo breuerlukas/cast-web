@@ -37,6 +37,21 @@ body {
   border-radius: 5px;
 }
 
-#stock-chart {
+#stock-chart-wrapper {
   margin-top: 5%;
+  height: 40vh;
+}
+
+#stock-prediction-chart-wrapper {
+  margin-top: 1%;
+  height: 10vh;
+}
+
+@media (max-width: 400px) {
+  #stock-chart-wrapper {
+    height: 30vh;
+  }
+  #stock-prediction-chart-wrapper {
+    height: 15vh;
+  }
 }
