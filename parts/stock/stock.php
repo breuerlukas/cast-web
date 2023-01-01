@@ -90,4 +90,4 @@ function drawGraph(chart, title, xValues, yValues) {
     }
   });
 }
-</script>""
+</script>
