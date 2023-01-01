@@ -12,7 +12,7 @@ var canvasWidth = parseInt(canvas.getAttribute('width'));
 var canvasHeight = parseInt(canvas.getAttribute('height'));
 var context = canvas.getContext('2d');
 
-const BALL_AMOUNT = 100;
+const BALL_AMOUNT = parseInt((window.innerWidth * window.innerHeight) / 20000);
 
 var ball = {
   x: 0,
