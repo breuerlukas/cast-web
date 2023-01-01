@@ -1,4 +1,4 @@
-""<div id="stock-wrapper">
+<div id="stock-wrapper">
   <div id="stock-search-box">
     <input id="stock-search-input" placeholder="Search for stock..." type="text" class="form-control" value="" autocomplete="off">
     <button id="stock-search-button" type="button">
