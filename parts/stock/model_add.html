@@ -1,0 +1,37 @@
+<div id="model-add-wrapper">
+  <a>Buy Model Path</a></br>
+  <input id="model-buy-path" name="model-buy-path"></br></br>
+  <a>Sell Model Path</a></br>
+  <input id="model-sell-path" name="model-sell-path"></br></br>
+  <a>Review Period</a></br>
+  <input id="model-review-period" name="model-review-period"></br></br>
+  <a>Buy Prediction Minimum</a></br>
+  <input id="model-buy-trade-prediction-minimum" name="model-buy-trade-prediction-minimum"></br></br>
+  <a>Sell Prediction Minimum</a></br>
+  <input id="model-sell-trade-prediction-minimum" name="model-sell-trade-prediction-minimum"></br></br>
+</div>
+
+<script>
+  $(document).ready(function() {
+    if (window.sessionStorage.getItem("buyModelPath") != null) {
+      document.getElementById("model-buy-path").value = window.sessionStorage.getItem("buyModelPath");
+      window.sessionStorage.removeItem("buyModelPath");
+    }
+    if (window.sessionStorage.getItem("sellModelPath") != null) {
+      document.getElementById("model-sell-path").value = window.sessionStorage.getItem("sellModelPath");
+      window.sessionStorage.removeItem("sellModelPath");
+    }
+    if (window.sessionStorage.getItem("reviewPeriod") != null) {
+      document.getElementById("model-review-period").value = window.sessionStorage.getItem("reviewPeriod");
+      window.sessionStorage.removeItem("reviewPeriod");
+    }
+    if (window.sessionStorage.getItem("buyTradePredictionMinimum") != null) {
+      document.getElementById("model-buy-trade-prediction-minimum").value = window.sessionStorage.getItem("buyTradePredictionMinimum");
+      window.sessionStorage.removeItem("buyTradePredictionMinimum");
+    }
+    if (window.sessionStorage.getItem("sellTradePredictionMinimum") != null) {
+      document.getElementById("model-sell-trade-prediction-minimum").value = window.sessionStorage.getItem("sellTradePredictionMinimum");
+      window.sessionStorage.removeItem("sellTradePredictionMinimum");
+    }
+  });
+</script>

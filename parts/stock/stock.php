@@ -5,8 +5,11 @@
       <i class="fa fa-search"></i>
     </button>
   </div>
+  <div id="stock-headline-wrapper">
+    <h2 id="stock-chart-headline"></h2>
+    <button id="stock-model-settings"><i id="stock-model-settings-icon"></i></button>
+  </div>
   <div id="stock-chart-wrapper">
-    <canvas id="stock-chart"></canvas>
   </div>
   <div id="stock-prediction-chart-wrapper">
   </div>
@@ -15,8 +18,7 @@
 <script>
 $(document).ready(function() {
   if (window.sessionStorage.getItem("stock") != null) {
-    displayStockChart(window.sessionStorage.getItem("stock"), 365);
-    window.sessionStorage.removeItem("stock");
+    display(window.sessionStorage.getItem("stock"), 365);
   }
 });
 
@@ -28,17 +30,14 @@ document.getElementById("stock-search-input").addEventListener("keypress", funct
 });
 
 document.getElementById("stock-search-button").onclick = function() {
-  displayStockChart(document.getElementById("stock-search-input").value, 365);
+  var searchValue = document.getElementById("stock-search-input").value;
+  window.sessionStorage.setItem("stock", searchValue);
+  display(searchValue, 365);
 }
 
-function displayStockChart(stock, reviewPeriod) {
-  var stockCanvas = document.getElementById("stock-chart");
-  stockCanvas.getContext("2d").clearRect(0, 0, stockCanvas.width, stockCanvas.height);
-  document.getElementById("stock-prediction-chart-wrapper").innerHTML = "";
-  var loader = document.createElement("div");
-  loader.id = "stock-chart-loader";
-  loader.classList.add("loader");
-  document.getElementById("stock-wrapper").appendChild(loader);
+function display(stock, reviewPeriod) {
+  resetContent();
+  displayLoader();
   var xValues = [];
   for (var i = 0; i < reviewPeriod; i++) {
     xValues[i] = i;
@@ -50,17 +49,47 @@ function displayStockChart(stock, reviewPeriod) {
     let request = new HttpRequest("http://lukasbreuer.de:8080/stock/predictions", "POST", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, tradeType: "BUY", reviewPeriod: reviewPeriod + ""});
     request.send(function (status, responseText) {
-        document.getElementById("stock-wrapper").removeChild(loader);
-      drawGraph("stock-chart", "Prices", xValues, prices);
+      document.getElementById("stock-wrapper").removeChild(document.getElementById("stock-chart-loader"));
+      document.getElementById("stock-chart-headline").innerHTML = "Prices / Predictions";
+      document.getElementById("stock-model-settings-icon").classList.add("fa", "fa-gear");
+      displayStockCanvas(xValues, prices);
       if (status != 404) {
         var predictions = JSON.parse(responseText).predictions;
-        var predictionCanvas = document.createElement('canvas');
-        predictionCanvas.id = "stock-prediction-chart";
-        document.getElementById("stock-prediction-chart-wrapper").appendChild(predictionCanvas);
-        drawGraph("stock-prediction-chart", "Predictions", xValues, predictions);
+        displayPredictionCanvas(xValues, predictions);
       }
     });
   });
+}
+
+function resetContent() {
+  document.getElementById("stock-chart-wrapper").innerHTML = "";
+  var predictionChartWrapper = document.getElementById("stock-prediction-chart-wrapper");
+  predictionChartWrapper.innerHTML = "";
+  predictionChartWrapper.setAttribute("style", "height: 0");
+  document.getElementById("stock-chart-headline").innerHTML = "";
+  document.getElementById("stock-model-settings-icon").classList.remove("fa", "fa-gear");
+}
+
+function displayLoader() {
+  var loader = document.createElement("div");
+  loader.id = "stock-chart-loader";
+  loader.classList.add("loader");
+  document.getElementById("stock-wrapper").appendChild(loader);
+}
+
+function displayStockCanvas(xValues, prices) {
+  var stockCanvas = document.createElement('canvas');
+  stockCanvas.id = "stock-chart";
+  document.getElementById("stock-chart-wrapper").appendChild(stockCanvas);
+  drawGraph("stock-chart", "Prices", xValues, prices);
+}
+
+function displayPredictionCanvas(xValues, predictions) {
+  document.getElementById("stock-prediction-chart-wrapper").setAttribute("style", "");
+  var predictionCanvas = document.createElement('canvas');
+  predictionCanvas.id = "stock-prediction-chart";
+  document.getElementById("stock-prediction-chart-wrapper").appendChild(predictionCanvas);
+  drawGraph("stock-prediction-chart", "Predictions", xValues, predictions);
 }
 
 function drawGraph(chart, title, xValues, yValues) {
@@ -90,4 +119,85 @@ function drawGraph(chart, title, xValues, yValues) {
     }
   });
 }
+
+document.getElementById("stock-model-settings").addEventListener("click", event => {
+  var stock = window.sessionStorage.getItem("stock").toUpperCase();
+  let request = new HttpRequest("http://lukasbreuer.de:8080/model/exists", "POST", [{key: "Content-Type", value: "application/json"},
+    {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
+  request.send(function (status, responseText) {
+    var exists = JSON.parse(responseText).exists;
+    if (exists) {
+      let request = new HttpRequest("http://lukasbreuer.de:8080/model/find", "POST", [{key: "Content-Type", value: "application/json"},
+        {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
+      request.send(function (status, responseText) {
+        var result = JSON.parse(responseText);
+        openModelSettingsWindow(stock, result.buyModelPath, result.sellModelPath, result.reviewPeriod,
+          result.buyTradePredictionMinimum, result.sellTradePredictionMinimum);
+      });
+      return;
+    }
+    openModelAddWindow(stock);
+  });
+});
+
+function openModelAddWindow(stock) {
+  openModelWindow(function () {
+    let request = new HttpRequest("http://lukasbreuer.de:8080/model/add", "POST", [{key: "Content-Type", value: "application/json"},
+      {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, buyModelPath: $("#model-buy-path").val(),
+        sellModelPath: $("#model-sell-path").val(), reviewPeriod: $("#model-review-period").val(),
+        buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(), sellTradePredictionMinimum: $("#model-sell-trade-prediction-minimum").val()});
+    request.send(function (status, responseText) {swal("Added!", "You have successfully added that model!", "success")});
+  });
+}
+
+function openModelSettingsWindow(stock, buyModelPath, sellModelPath, reviewPeriod, buyTradePredictionMinimum, sellTradePredictionMinimum) {
+  window.sessionStorage.setItem("buyModelPath", buyModelPath);
+  window.sessionStorage.setItem("sellModelPath", sellModelPath);
+  window.sessionStorage.setItem("reviewPeriod", reviewPeriod);
+  window.sessionStorage.setItem("buyTradePredictionMinimum", buyTradePredictionMinimum);
+  window.sessionStorage.setItem("sellTradePredictionMinimum", sellTradePredictionMinimum);
+  openModelWindow(function () {
+    let request = new HttpRequest("http://lukasbreuer.de:8080/model/update", "POST", [{key: "Content-Type", value: "application/json"},
+      {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, buyModelPath: $("#model-buy-path").val(),
+        sellModelPath: $("#model-sell-path").val(), reviewPeriod: $("#model-review-period").val(),
+        buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(), sellTradePredictionMinimum: $("#model-sell-trade-prediction-minimum").val()});
+    request.send(function (status, responseText) {swal("Adjusted!", "You have successfully adjusted that model!", "success")});
+  });
+}
+
+function openModelWindow(callback) {
+  const div = document.createElement("div");
+  fetch('parts/stock/model_add.html')
+    .then(response => response.text())
+    .then(text => $(div).html(text));
+  swal({
+    title: "Model",
+    content: div,
+    buttons: {
+      cancel: "Cancel",
+      confirm: "OK"
+    },
+  }).then(result => {
+    if (result === true) {
+      if (checkEmptyFields()) {
+        swal({
+          title: "Oops...",
+          text: "Please fill out all fields before you create the entry!",
+          icon: "error"
+        });
+        return;
+      }
+      callback();
+    }
+  });
+}
+
+function checkEmptyFields() {
+  return $("#model-buy-path").val() == "" || $("#model-sell-path").val() == "" || $("#model-review-period").val() == "" ||
+    $("#model-buy-trade-prediction-minimum").val() == "" || $("#model-sell-trade-prediction-minimum").val() == "";
+}
+
+window.onbeforeunload = function (event) {
+  window.sessionStorage.removeItem("stock");
+};
 </script>
