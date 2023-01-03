@@ -128,7 +128,7 @@ body {
   }
 }
 
-.portfolio-settings {
+.portfolio-list-settings {
   background-color: #1b232f;
   border: none;
   font-size: 3em !important;
@@ -136,7 +136,7 @@ body {
   transition: 0.3s;
 }
 
-.portfolio-settings:hover {
+.portfolio-list-settings:hover {
   color: #999999;
   transform: scale(1.1);
 }
