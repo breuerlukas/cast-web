@@ -39,6 +39,13 @@
 </div>
 
 <script>
+  var trades;
+  var filters = [];
+  var currentFilter;
+  var currentFilterDirection;
+  var currentFilterIcon;
+  var currentNameFilter = "";
+
   $(document).ready(function() {
     fetchTradeData(function() {
       registerAllFilters();
@@ -68,13 +75,6 @@
     });
   }
 
-  var trades;
-  var filters = [];
-  var currentFilter;
-  var currentFilterDirection;
-  var currentFilterIcon;
-  var currentNameFilter = "";
-
   function displayTrades() {
     var sortedTrades = trades.sort(sort(currentFilter.variableName));
     if (currentFilterDirection) {
@@ -102,12 +102,13 @@
       window.sessionStorage.setItem("stock", stockName);
       window.location.href = "/?page=stock/";
     });
-    appendCell(entry, "stock", stockName);
+    appendCell(entry, "stock", stockName, "span");
     var date = new Date(purchaseTime);
-    appendCell(entry, "purchase-time", date.getDate().pad() + "." + (date.getMonth() + 1).pad() + "." + date.getFullYear().pad());
-    appendCell(entry, "purchase-price", purchasePrice.toFixed(3));
-    appendCell(entry, "current-price", currentPrice.toFixed(3));
-    var lossSpan = appendCell(entry, "profit-loss", profitLoss.toFixed(3));
+    var formattedDate = date.getDate().pad() + "." + (date.getMonth() + 1).pad() + "." + date.getFullYear().pad();
+    appendCell(entry, "purchase-time", formattedDate, "span");
+    appendCell(entry, "purchase-price", purchasePrice.toFixed(3), "span");
+    appendCell(entry, "current-price", currentPrice.toFixed(3), "span");
+    var lossSpan = appendCell(entry, "profit-loss", profitLoss.toFixed(3), "span");
     if (profitLoss > 0) {
       lossSpan.classList.add("text-success");
     } else {
@@ -120,14 +121,14 @@
     return (this < 10 ? "0" : "") + this;
   }
 
-  function appendCell(entry, identifier, information) {
+  function appendCell(entry, identifier, information, elementType) {
     var div = document.createElement("div");
-    var span = document.createElement("span");
-    span.innerText = information;
-    span.classList.add("trade-list-" + identifier);
-    div.appendChild(span);
+    var element = document.createElement(elementType);
+    element.innerText = information;
+    element.classList.add("portfolio-list-" + identifier);
+    div.appendChild(element);
     entry.appendChild(div);
-    return span;
+    return element;
   }
 
   function registerAllFilters() {
