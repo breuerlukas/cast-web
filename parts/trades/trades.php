@@ -98,6 +98,10 @@
 
   function displayTrade(tradeId, stockName, purchaseTime, purchasePrice, currentPrice, profitLoss) {
     var entry = document.createElement('li');
+    entry.addEventListener("click", event => {
+      window.sessionStorage.setItem("stock", stockName);
+      window.location.href = "/?page=stock/";
+    });
     appendCell(entry, "stock", stockName);
     var date = new Date(purchaseTime);
     appendCell(entry, "purchase-time", date.getDate().pad() + "." + (date.getMonth() + 1).pad() + "." + date.getFullYear().pad());
