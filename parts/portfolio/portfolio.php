@@ -31,7 +31,7 @@
 
 <script>
   $(document).ready(function() {
-    displayPortfolio();
+    changeFilter(document.getElementById("portfolio-filter-stock"), Filter.Stock);
   });
 
   const Filter = {
@@ -43,7 +43,6 @@
   var currentFilterDirection;
   var currentFilterIcon;
   var currentNameFilter = "";
-  changeFilter(document.getElementById("portfolio-filter-stock"), Filter.Stock);
 
   function sort(field) {
     return function(first, second) {
@@ -155,6 +154,7 @@
       currentFilterDirection = filter === Filter.Stock;
       currentFilterIcon = element.firstChild;
       changeFilter(element, filter);
+      return;
     }
     displayPortfolio();
   }
