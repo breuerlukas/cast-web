@@ -16,9 +16,11 @@
 </div>
 
 <script>
+const REVIEW_PERIOD = 365;
+
 $(document).ready(function() {
   if (window.sessionStorage.getItem("stock") != null) {
-    display(window.sessionStorage.getItem("stock"), 365);
+    display(window.sessionStorage.getItem("stock"), REVIEW_PERIOD);
   }
 });
 
@@ -32,7 +34,7 @@ document.getElementById("stock-search-input").addEventListener("keypress", funct
 document.getElementById("stock-search-button").onclick = function() {
   var searchValue = document.getElementById("stock-search-input").value;
   window.sessionStorage.setItem("stock", searchValue);
-  display(searchValue, 365);
+  display(searchValue, REVIEW_PERIOD);
 }
 
 function display(stock, reviewPeriod) {
@@ -44,21 +46,46 @@ function display(stock, reviewPeriod) {
   }
   let request = new HttpRequest("http://lukasbreuer.de:8080/stock/prices", "POST", [{key: "Content-Type", value: "application/json"},
     {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, reviewPeriod: reviewPeriod + ""});
-  request.send(function (status, responseText) {
-    var prices = JSON.parse(responseText).prices;
+  request.send(function (priceStatus, priceResponse) {
     let request = new HttpRequest("http://lukasbreuer.de:8080/stock/predictions", "POST", [{key: "Content-Type", value: "application/json"},
-      {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, tradeType: "BUY", reviewPeriod: reviewPeriod + ""});
-    request.send(function (status, responseText) {
-      document.getElementById("stock-wrapper").removeChild(document.getElementById("stock-chart-loader"));
-      document.getElementById("stock-chart-headline").innerHTML = "Prices / Predictions";
-      document.getElementById("stock-model-settings-icon").classList.add("fa", "fa-gear");
-      displayStockCanvas(xValues, prices);
-      if (status != 404) {
-        var predictions = JSON.parse(responseText).predictions;
-        displayPredictionCanvas(xValues, predictions);
-      }
+      {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, reviewPeriod: reviewPeriod + ""});
+    request.send(function (predictionStatus, predictionResponse) {
+      let request = new HttpRequest("http://lukasbreuer.de:8080/trades/latest", "POST", [{key: "Content-Type", value: "application/json"},
+        {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
+      request.send(function (latestTradesStatus, latestTradesResponse) {
+        var prices = JSON.parse(priceResponse).prices;
+        var latestTrades = JSON.parse(latestTradesResponse);
+        displayStockCanvas(xValues, prices, calculateBoughtLine(latestTrades));
+        document.getElementById("stock-wrapper").removeChild(document.getElementById("stock-chart-loader"));
+        document.getElementById("stock-chart-headline").innerHTML = "Prices / Predictions";
+        document.getElementById("stock-model-settings-icon").classList.add("fa", "fa-gear");
+        if (predictionStatus != 404) {
+          var predictions = JSON.parse(predictionResponse).predictions;
+          displayPredictionCanvas(xValues, predictions);
+        }
+      });
     });
   });
+}
+
+function calculateBoughtLine(latestTrades) {
+  if (!Object.hasOwn(latestTrades, "latestBuy")) {
+    return [];
+  }
+  var latestBuy = latestTrades.latestBuy;
+  if (Object.hasOwn(latestTrades, "latestSell")) {
+    var latestSell = latestTrades.latestSell;
+    if (latestSell.tradeTime > latestBuy.tradeTime) {
+      return [];
+    }
+  }
+  var difference = latestBuy.tradeTime - (new Date().getTime() - (REVIEW_PERIOD * 1000 * 60 * 60 * 24));
+  var convertedTime = difference / (1000 * 60 * 60 * 24);
+  var lines = [];
+  if (difference > 0) {
+    lines.push(parseInt(convertedTime));
+  }
+  return lines;
 }
 
 function resetContent() {
@@ -77,11 +104,11 @@ function displayLoader() {
   document.getElementById("stock-wrapper").appendChild(loader);
 }
 
-function displayStockCanvas(xValues, prices) {
+function displayStockCanvas(xValues, prices, latestBuy) {
   var stockCanvas = document.createElement('canvas');
   stockCanvas.id = "stock-chart";
   document.getElementById("stock-chart-wrapper").appendChild(stockCanvas);
-  drawGraph("stock-chart", "Prices", xValues, prices);
+  return drawGraph("stock-chart", "Prices", xValues, prices, latestBuy);
 }
 
 function displayPredictionCanvas(xValues, predictions) {
@@ -89,11 +116,11 @@ function displayPredictionCanvas(xValues, predictions) {
   var predictionCanvas = document.createElement('canvas');
   predictionCanvas.id = "stock-prediction-chart";
   document.getElementById("stock-prediction-chart-wrapper").appendChild(predictionCanvas);
-  drawGraph("stock-prediction-chart", "Predictions", xValues, predictions);
+  return drawGraph("stock-prediction-chart", "Predictions", xValues, predictions, []);
 }
 
-function drawGraph(chart, title, xValues, yValues) {
-  new Chart(chart, {
+function drawGraph(chart, title, xValues, yValues, lines) {
+  return new Chart(chart, {
     type: "line",
     data: {
       labels: xValues,
@@ -105,6 +132,7 @@ function drawGraph(chart, title, xValues, yValues) {
         fill: false
       }]
     },
+    lineAtIndex: lines,
     options: {
       maintainAspectRatio: false,
       scales: {
