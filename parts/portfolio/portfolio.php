@@ -200,7 +200,7 @@
   function openStockSettings(stockId, stockName) {
     window.sessionStorage.setItem("portfolioStock", stockName);
     const div = document.createElement("div");
-    fetch('parts/portfolio/portfolio_add.html')
+    fetch('/parts/portfolio/portfolio_add.html')
       .then(response => response.text())
       .then(text => $(div).html(text));
     swal({
