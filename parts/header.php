@@ -11,12 +11,10 @@
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trades')) { echo 'active'; }?>" href="/trades/">Trades</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'stock')) { echo 'active'; }?>" href="/stock/">Stock</a></li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Training
-          </a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Train</a>
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbar-dropdown">
-            <a class="dropdown-item" href="#">Section</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="/train/preset/">Preset</a>
+            <a class="dropdown-item" href="/train/execution">Execution</a>
           </div>
         </li>
       </ul>
