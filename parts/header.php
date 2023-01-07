@@ -4,27 +4,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbar-container">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pagename, 'home')) { echo 'active'; }?>" aria-current="page" href="?page=home">Home</a></li>
-        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pagename, 'portfolio')) { echo 'active'; }?>" href="?page=portfolio/">Portfolio</a></li>
-        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pagename, 'trades')) { echo 'active'; }?>" href="?page=trades/">Trades</a></li>
-        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pagename, 'stock')) { echo 'active'; }?>" href="?page=stock/">Stock</a></li>
+        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'home')) { echo 'active'; }?>" aria-current="page" href="?page=home">Home</a></li>
+        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'portfolio')) { echo 'active'; }?>" href="?page=portfolio/">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trades')) { echo 'active'; }?>" href="?page=trades/">Trades</a></li>
+        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'stock')) { echo 'active'; }?>" href="?page=stock/">Stock</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Training
+          </a>
+          <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbar-dropdown">
+            <a class="dropdown-item" href="#">Section</a>
+            <a class="dropdown-item" href="#">Another action</a>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
-
-<script>
-  $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
-    if (!$(this).next().hasClass('show')) {
-      $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
-    }
-    var $subMenu = $(this).next('.dropdown-menu');
-    $subMenu.toggleClass('show');
-    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-      $('.dropdown-submenu .show').removeClass('show');
-    });
-    return false;
-  });
-</script>
