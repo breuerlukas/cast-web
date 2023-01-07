@@ -173,7 +173,7 @@
 
   document.getElementById("portfolio-add").addEventListener("click", event => {
     const div = document.createElement("div");
-    fetch('parts/portfolio/portfolio_add.html')
+    fetch('/parts/portfolio/portfolio_add.html')
       .then(response => response.text())
       .then(text => $(div).html(text));
     swal({

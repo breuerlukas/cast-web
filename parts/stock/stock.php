@@ -195,7 +195,7 @@ function openModelSettingsWindow(stock, buyModelPath, sellModelPath, reviewPerio
 
 function openModelWindow(callback) {
   const div = document.createElement("div");
-  fetch('parts/stock/model_add.html')
+  fetch('/parts/stock/model_add.html')
     .then(response => response.text())
     .then(text => $(div).html(text));
   swal({
