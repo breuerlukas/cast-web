@@ -4,12 +4,13 @@
     header("Location: /home/");
     die();
   }
-  $pagePath = explode("/", $uri);
-  if ($pagePath[count($pagePath) - 1] == "") {
-    array_pop($pagePath);
-  }
+  $pagePath = array_values(array_filter(explode("/", $uri), "removeBlank"));
   $pathSize = count($pagePath);
   $pageName = $pagePath[$pathSize - 1];
+
+  function removeBlank($value){
+    return ($value !== NULL && $value !== "");
+  }
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
   <link rel="stylesheet" href="/css/bootstrap.css" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/loader.css">
-  <link rel="stylesheet" href="/css/<?php echo $pagePath[$pathSize - 1];?>.css">
+  <link rel="stylesheet" href="/css/<?php echo ($pathSize > 1 ? $pagePath[$pathSize - 2] . "-" : "") . $pageName;?>.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="/js/cookie.js"></script>
   <script src="/js/httprequest.js"></script>
@@ -40,7 +41,7 @@
 <body>
 <?php
   include("header.php");
-  $pageFile = "parts" . implode("/", $pagePath) . "/" . $pageName . ".php";
+  $pageFile = "parts/" . implode("/", $pagePath) . "/" . $pageName . ".php";
   if(file_exists($pageFile)) {
     include($pageFile);
   } else {
