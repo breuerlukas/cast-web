@@ -12,6 +12,10 @@ body::-webkit-scrollbar-thumb {
   border: 3px solid #322e25;
 }
 
+.navbar {
+  z-index: 100;
+}
+
 #navbar-container {
   margin-left: 15%;
 }
