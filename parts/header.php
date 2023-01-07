@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-container" aria-controls="navbar-container" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-container"
+            aria-controls="navbar-container" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -11,7 +12,8 @@
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trades')) { echo 'active'; }?>" href="/trades/">Trades</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'stock')) { echo 'active'; }?>" href="/stock/">Stock</a></li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Train</a>
+          <a class="nav-link dropdown-toggle <?php if(!strcmp($pageName, 'preset') || !strcmp($pageName, 'execution')) { echo 'active'; }?>"
+             href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Train</a>
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbar-dropdown">
             <a class="dropdown-item" href="/train/preset/">Preset</a>
             <a class="dropdown-item" href="/train/execution">Execution</a>
