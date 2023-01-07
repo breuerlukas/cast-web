@@ -100,7 +100,7 @@
     var entry = document.createElement('li');
     entry.addEventListener("click", event => {
       window.sessionStorage.setItem("stock", stockName);
-      window.location.href = "/?page=stock/";
+      window.location.href = "/stock/";
     });
     appendCell(entry, "stock", stockName, "span");
     var date = new Date(purchaseTime);
