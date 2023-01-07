@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cast - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel=icon type="image/png" href="img/logo.png" sizes="32x32">
-  <link rel="stylesheet" href="css/bootstrap.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/login.css">
+  <link rel=icon type="image/png" href="/img/logo.png" sizes="32x32">
+  <link rel="stylesheet" href="/css/bootstrap.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/login.css">
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
-  <script src="js/cookie.js"></script>
-  <script src="js/httprequest.js"></script>
+  <script src="/js/cookie.js"></script>
+  <script src="/js/httprequest.js"></script>
 </head>
 <body>
   <form>
