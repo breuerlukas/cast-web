@@ -89,7 +89,7 @@
   </div>
   <div class="container pt-5 pb-5">
     <div class="row justify-content-between">
-      <div class="col-md-7 dashboard-chart-column">
+      <div class="col-md-8 dashboard-chart-column">
         <div class="dashboard-chart">
           <h4 class="text-light mb-5">Overview</h4>
           <canvas id="dashboard-line-chart"></canvas>
