@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/loader.css">
   <link rel="stylesheet" href="/css/<?php echo ($pathSize > 1 ? $pagePath[$pathSize - 2] . "-" : "") . $pageName;?>.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css" >
   <script src="/js/cookie.js"></script>
   <script src="/js/httprequest.js"></script>
   <script src="/js/dom.js"></script>
