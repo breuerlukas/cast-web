@@ -1,5 +1,5 @@
 <div id="dashboard-wrapper">
-  <div class="container pt-5 pb-5">
+  <div class="container pt-5">
     <div class="row">
       <div class="col-md-3">
         <div class="card">
@@ -87,7 +87,7 @@
       </div>
     </div>
   </div>
-  <div class="container pt-5 pb-5">
+  <div class="container pt-5">
     <div class="row justify-content-between">
       <div class="col-md-8 dashboard-chart-column">
         <div class="dashboard-chart">
