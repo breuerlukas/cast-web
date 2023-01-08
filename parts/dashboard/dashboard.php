@@ -162,8 +162,7 @@
         datasets: [{
           label: title,
           data: data,
-          borderColor: "#3a8499",
-          borderWidth: 1.5,
+          borderWidth: 0,
           backgroundColor: colors
         }]
       },
