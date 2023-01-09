@@ -14,7 +14,7 @@
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'stock')) { echo 'active'; }?>" href="/stock/">Stock</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?php if(!strcmp($pageName, 'preset') || !strcmp($pageName, 'execution')) { echo 'active'; }?>"
-             href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Train</a>
+             href="#" id="navbar-dropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Train</a>
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbar-dropdown">
             <a class="dropdown-item" href="/train/preset/">Preset</a>
             <a class="dropdown-item" href="/train/execution">Execution</a>
