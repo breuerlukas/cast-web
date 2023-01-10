@@ -119,8 +119,10 @@ function displayPredictionCanvas(xValues, predictions) {
   return drawGraph("stock-prediction-chart", "Predictions", xValues, predictions, []);
 }
 
-function drawGraph(chart, title, xValues, yValues, lines) {
-  return new Chart(chart, {
+var firstX = -1;
+
+function drawGraph(chartElement, title, xValues, yValues, lines) {
+  const chart = new Chart(chartElement, {
     type: "line",
     data: {
       labels: xValues,
@@ -135,9 +137,29 @@ function drawGraph(chart, title, xValues, yValues, lines) {
     lineAtIndex: lines,
     options: {
       maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
       scales: {
         xAxes: [{gridLines: { color: "#131c2b" }}],
         yAxes: [{gridLines: { color: "#131c2b" }}]
+      },
+      onClick: (e) => {
+        const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
+        var xAxis = chart.scales['x-axis-0'];
+        var yAxis = chart.scales['y-axis-0'];
+
+        // Substitute the appropriate scale IDs
+        const dataX = xAxis.getValueForPixel(canvasPosition.x);
+        console.log(dataX);
+        if (firstX === -1) {
+          firstX = dataX;
+          return;
+        }
+        var context = chart.ctx;
+        context.fillStyle = "rgba(0, 0, 0, 0.4)";
+        context.fillRect(xAxis.getPixelForValue(firstX), yAxis.getPixelForValue(yAxis.max),
+          xAxis.getPixelForValue(dataX - firstX), yAxis.getPixelForValue(0));
       },
       elements: {
         point:{
@@ -146,6 +168,7 @@ function drawGraph(chart, title, xValues, yValues, lines) {
       }
     }
   });
+  return chart;
 }
 
 document.getElementById("stock-model-settings").addEventListener("click", event => {
