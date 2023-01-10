@@ -87,18 +87,37 @@
       </div>
     </div>
   </div>
-  <div class="container pt-5">
+  <div class="container pt-3">
     <div class="row justify-content-between">
-      <div class="col-md-8 dashboard-chart-column">
-        <div class="dashboard-chart">
+      <div class="col-md-8 dashboard-profit-column">
+        <div class="dashboard-profit">
           <h4 class="text-light mb-5">Overview</h4>
-          <canvas id="dashboard-line-chart"></canvas>
+          <canvas id="dashboard-profit-line-chart"></canvas>
         </div>
       </div>
-      <div class="col-md-4 dashboard-chart-column">
-        <div class="dashboard-chart">
+      <div class="col-md-4 dashboard-profit-column">
+        <div class="dashboard-profit">
           <h4 class="text-light mb-5">Profit / Loss</h4>
-          <canvas id="dashboard-doughnut-chart"></canvas>
+          <canvas id="dashboard-profit-doughnut-chart"></canvas>
+          <h2 class="text-light text-center mt-lg-5">21</h2>
+          <p class="text-light text-center">Trades out of a total of 38 are profitable</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container pt-3">
+    <div class="row justify-content-between">
+      <div class="col-md-4 dashboard-portfolio-column">
+        <div class="dashboard-portfolio">
+          <h4 class="text-light mb-5">Trades</h4>
+          <canvas id="dashboard-portfolio-doughnut-chart"></canvas>
+          <h2 class="text-light text-center mt-lg-5">21</h2>
+          <p class="text-light text-center">Trades out of a total of 38 are profitable</p>
+        </div>
+      </div>
+      <div class="col-md-8 dashboard-portfolio-column">
+        <div class="dashboard-portfolio">
+          <h4 class="text-light mb-5">Portfolio</h4>
         </div>
       </div>
     </div>
@@ -107,8 +126,9 @@
 
 <script>
   $(document).ready(function() {
-    drawLineChart("dashboard-line-chart", "Prices", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-    drawDoughnutChart("dashboard-doughnut-chart", "Profit / Loss", ["Profit", "Loss", "Neutral"], [80, 18, 2], ["#aaff2a", "#ff5959", "#bcbcbc"]);
+    drawLineChart("dashboard-profit-line-chart", "Prices", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    drawDoughnutChart("dashboard-profit-doughnut-chart", "Profit / Loss", ["Profit", "Loss", "Neutral"], [80, 18, 2], ["#aaff2a", "#ff5959", "#bcbcbc"]);
+    drawDoughnutChart("dashboard-portfolio-doughnut-chart", "Profit / Loss", ["Profit", "Loss", "Neutral"], [80, 18, 2], ["#aaff2a", "#ff5959", "#bcbcbc"]);
   });
 
   function drawLineChart(chartElement, title, xValues, yValues) {
@@ -174,11 +194,11 @@
         cutoutPercentage: 90
       }
     });
-    appendDoughnutCenterText(chart, data[0] + "%");
+    appendDoughnutCenterText(chart, data[0] + "%", "Profit");
     return chart;
   }
 
-  function appendDoughnutCenterText(chart, text) {
+  function appendDoughnutCenterText(chart, firstLine, secondLine) {
     Chart.pluginService.register({
       beforeDraw: function(event) {
         if (event.chart !== chart) {
@@ -188,13 +208,17 @@
           height = chart.height,
           ctx = chart.ctx;
         ctx.restore();
-        var fontSize = (height / 114).toFixed(2);
-        ctx.font = "bold " + fontSize + "em sans-serif";
+        ctx.font = "bold " + (height / 150).toFixed(2) + "em sans-serif";
         ctx.textBaseline = "middle";
-        ctx.fillStyle = "#ffffff";
-        var textX = Math.round((width - ctx.measureText(text).width) / 2);
-        var textY = height / 2;
-        ctx.fillText(text, textX, textY);
+        ctx.fillStyle = "#ededed";
+        var firstLineX = Math.round((width - ctx.measureText(firstLine).width) / 2);
+        var firstLineY = Math.round((height / 2) - (ctx.measureText('M').width / 1.5));
+        ctx.fillText(firstLine, firstLineX, firstLineY);
+        ctx.font = "bold " + (height / 200).toFixed(2) + "em sans-serif";
+        ctx.fillStyle = "#b2b2b2";
+        var secondLineX = Math.round((width - ctx.measureText(secondLine).width) / 2);
+        var secondLineY = Math.round((height / 2) + (ctx.measureText('M').width / 1.5));
+        ctx.fillText(secondLine, secondLineX, secondLineY);
         ctx.save();
       }
     });

@@ -1,5 +1,5 @@
 body {
-  background-color: #0d1117;
+  background-color: #0d1117 !important;
 }
 
 @media (min-width: 1400px) {
@@ -10,7 +10,7 @@ body {
 
 .card {
   position: relative;
-  background-color: #1b232f;
+  background-color: #1b232f !important;
   margin-bottom: 1.25rem;
   border: 1px solid #273237;
   border-radius: .25rem;
@@ -54,7 +54,7 @@ body {
 }
 
 .badge-cyan {
-  color: #00c9a7;
+  color: #00c9a7 !important;
   background: rgba(0, 201, 168, 0.12);
   border-color: transparent;
   font-weight: 500;
@@ -89,20 +89,29 @@ body {
 }
 
 .badge-red {
-  color: #de4436;
+  color: #de4436 !important;
   background: rgba(222, 67, 53, 0.15);
   border-color: transparent;
   font-weight: 500;
 }
 
-.dashboard-chart-column {
+.dashboard-profit-column {
   margin-bottom: 2em;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
 }
 
-.dashboard-chart {
+.dashboard-profit-column:hover {
+  transform: scale(1.03);
+}
+
+.dashboard-profit {
   padding: 1.5rem;
   border-radius: .5rem;
-  background-color: #1b232f;
+  background-color: #1b232f !important;
   box-shadow: 2px 2px #1a1a1a;
   height: 100%;
 }
