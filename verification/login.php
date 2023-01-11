@@ -16,39 +16,39 @@
 </head>
 <body>
   <form>
-    <p id="castLabel">Cast</p>
+    <p id="cast-label">Cast</p>
     <div class="form-outline mb-4">
-      <input type="username" id="usernameForm" class="form-control" placeholder="Username">
+      <input type="username" id="username" class="form-control" placeholder="Username">
     </div>
     <div class="form-outline mb-4">
-      <input type="password" id="passwordForm" class="form-control" placeholder="Password"/>
+      <input type="password" id="password" class="form-control" placeholder="Password"/>
     </div>
-    <button type="button" id="loginButton" class="btn btn-primary mb-4">LOG IN</button>
+    <button type="button" id="login" class="btn btn-primary mb-4">LOG IN</button>
     <div>
-      <h id="authentificationFailed" class="text-danger"></h>
+      <h id="authentification-failed" class="text-danger"></h>
     </div>
   </form>
 </body>
 </html>
 
 <script>
-document.getElementById("passwordForm").addEventListener("keypress", function(event) {
+document.getElementById("password").addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     event.preventDefault();
-    document.getElementById("loginButton").click();
+    document.getElementById("login").click();
   }
 });
 
-document.getElementById('loginButton').onclick = function() {
+document.getElementById('login').onclick = function() {
   let request = new HttpRequest("http://lukasbreuer.de:8080/verification/login", "POST", [{key: "Content-Type", value: "application/json"}],
-    {username: document.getElementById("usernameForm").value, password: document.getElementById("passwordForm").value});
+    {username: document.getElementById("username").value, password: document.getElementById("password").value});
   request.send(function (status, responseText) {
     if (status == 200) {
       Cookie.create("token", JSON.parse(responseText).apiKey, 60 * 60);
       Cookie.create("tokenExpiration", +new Date() + 1000 * 60 * 60, 60 * 60);
       location.reload();
     } else {
-      document.getElementById("authentificationFailed").innerHTML = "Authentification Failed!";
+      document.getElementById("authentification-failed").innerHTML = "Authentification Failed!";
     }
   });
 };

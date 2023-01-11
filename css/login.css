@@ -6,14 +6,14 @@ form {
   margin-right: auto;
 }
 
-#castLabel {
+#cast-label {
   font-size: 10vw;
   color: rgba(6, 35, 44, 0.73);
   font-family: Gabriola;
   font-weight: bold;
 }
 
-#loginButton {
+#login {
   margin-top: 5%;
   width: 50%;
 }
@@ -24,7 +24,7 @@ form {
     margin-top: 40%;
   }
 
-  #loginButton {
+  #login {
     width: 80%;
   }
 }
