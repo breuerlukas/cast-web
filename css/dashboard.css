@@ -95,7 +95,7 @@ body {
   font-weight: 500;
 }
 
-.dashboard-profit-column {
+.dashboard-column {
   margin-bottom: 2em;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
@@ -104,14 +104,76 @@ body {
   -ms-transition: all 0.3s ease-in-out;
 }
 
-.dashboard-profit-column:hover {
+.dashboard-column:hover {
   transform: scale(1.03);
 }
 
-.dashboard-profit {
+.dashboard-content {
   padding: 1.5rem;
   border-radius: .5rem;
   background-color: #1b232f !important;
   box-shadow: 2px 2px #1a1a1a;
   height: 100%;
+}
+
+#dashboard-profit-line-chart-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#example_wrapper {
+  background: #1b232f;
+  color: white;
+  border: transparent 1px solid;
+  border-radius: .5rem;
+}
+
+#example {
+  background-color: #1b232f;
+  color: white;
+}
+
+.dataTables_length select, .dataTables_length select option {
+  color: white !important;
+}
+
+.dataTables_length select option {
+  background-color: #12171e;
+}
+
+table {
+  border-collapse: collapse !important;
+  border-color: transparent !important;
+}
+
+th {
+  padding: 1.5rem !important;
+}
+
+td, th {
+  border-color: transparent !important;
+}
+
+td {
+  color: white !important;
+  padding: 1.5rem !important;
+}
+
+.dataTables_paginate {
+  width: 100%;
+  text-align: center !important;
+}
+
+.paginate_button {
+  border-color: #999999 !important;
+}
+
+.paginate_button:hover {
+  background: none !important;
+  background: #2c3a4d !important;
+}
+
+.current {
+  background: rgba(78, 98, 123, 0.75) none !important;
 }

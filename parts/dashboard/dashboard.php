@@ -1,5 +1,5 @@
 <div id="dashboard-wrapper">
-  <div class="container pt-5">
+  <div class="container pt-4">
     <div class="row">
       <div class="col-md-3">
         <div class="card">
@@ -87,16 +87,18 @@
       </div>
     </div>
   </div>
-  <div class="container pt-3">
+  <div class="container pt-2">
     <div class="row justify-content-between">
-      <div class="col-md-8 dashboard-profit-column">
-        <div class="dashboard-profit">
-          <h4 class="text-light mb-5">Overview</h4>
-          <canvas id="dashboard-profit-line-chart"></canvas>
+      <div class="col-md-8 dashboard-column">
+        <div class="dashboard-content">
+          <h4 class="text-light">Overview</h4>
+          <div id="dashboard-profit-line-chart-wrapper">
+            <canvas id="dashboard-profit-line-chart" height="100%"></canvas>
+          </div>
         </div>
       </div>
-      <div class="col-md-4 dashboard-profit-column">
-        <div class="dashboard-profit">
+      <div class="col-md-4 dashboard-column">
+        <div class="dashboard-content">
           <h4 class="text-light mb-5">Profit / Loss</h4>
           <canvas id="dashboard-profit-doughnut-chart"></canvas>
           <h2 class="text-light text-center mt-lg-5">21</h2>
@@ -105,19 +107,66 @@
       </div>
     </div>
   </div>
-  <div class="container pt-3">
+  <div class="container pt-2">
     <div class="row justify-content-between">
-      <div class="col-md-4 dashboard-portfolio-column">
-        <div class="dashboard-portfolio">
+      <div class="col-md-4 dashboard-column">
+        <div class="dashboard-content">
           <h4 class="text-light mb-5">Trades</h4>
           <canvas id="dashboard-portfolio-doughnut-chart"></canvas>
           <h2 class="text-light text-center mt-lg-5">21</h2>
           <p class="text-light text-center">Trades out of a total of 38 are profitable</p>
         </div>
       </div>
-      <div class="col-md-8 dashboard-portfolio-column">
-        <div class="dashboard-portfolio">
-          <h4 class="text-light mb-5">Portfolio</h4>
+      <div class="col-md-8 dashboard-column">
+        <div class="dashboard-table-content">
+          <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Office</th>
+              <th>Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>$320,800</td>
+              </tr>
+              <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>$170,750</td>
+              </tr>
+              <tr>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>San Francisco</td>
+                <td>$86,000</td>
+              </tr>
+              <tr>
+                <td>Cedric Kelly</td>
+                <td>Senior Javascript Developer</td>
+                <td>Edinburgh</td>
+                <td>$433,060</td>
+              </tr>
+              <tr>
+                <td>Airi Satou</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>$162,700</td>
+              </tr>
+              <tr>
+                <td>Airi Satou</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>$162,700</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -129,6 +178,7 @@
     drawLineChart("dashboard-profit-line-chart", "Prices", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     drawDoughnutChart("dashboard-profit-doughnut-chart", "Profit / Loss", ["Profit", "Loss", "Neutral"], [80, 18, 2], ["#aaff2a", "#ff5959", "#bcbcbc"]);
     drawDoughnutChart("dashboard-portfolio-doughnut-chart", "Profit / Loss", ["Profit", "Loss", "Neutral"], [80, 18, 2], ["#aaff2a", "#ff5959", "#bcbcbc"]);
+    $('#example').DataTable({searching: false, info: false, lengthChange: false, pageLength: 5});
   });
 
   function drawLineChart(chartElement, title, xValues, yValues) {
