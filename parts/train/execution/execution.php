@@ -1,4 +1,4 @@
-<table id="example" class="table table-striped" style="width:100%">
+<table id="example" class="table" style="width:100%">
   <thead>
   <tr>
     <th>Name</th>
@@ -467,20 +467,10 @@
     <td>$112,000</td>
   </tr>
   </tbody>
-  <tfoot>
-  <tr>
-    <th>Name</th>
-    <th>Position</th>
-    <th>Office</th>
-    <th>Age</th>
-    <th>Start date</th>
-    <th>Salary</th>
-  </tr>
-  </tfoot>
 </table>
 
 <script>
   $(document).ready(function () {
-    $('#example').DataTable();
+    var table = $('#example').DataTable();
   });
 </script>
