@@ -93,7 +93,7 @@
         <div class="dashboard-content">
           <h4 class="text-light">Overview</h4>
           <div id="dashboard-profit-line-chart-wrapper">
-            <canvas id="dashboard-profit-line-chart" height="100%"></canvas>
+            <canvas id="dashboard-profit-line-chart" height="120%"></canvas>
           </div>
         </div>
       </div>
@@ -109,26 +109,19 @@
   </div>
   <div class="container pt-2">
     <div class="row justify-content-between">
-      <div class="col-md-4 dashboard-column">
-        <div class="dashboard-content">
-          <h4 class="text-light mb-5">Trades</h4>
-          <canvas id="dashboard-portfolio-doughnut-chart"></canvas>
-          <h2 class="text-light text-center mt-lg-5">21</h2>
-          <p class="text-light text-center">Trades out of a total of 38 are profitable</p>
-        </div>
-      </div>
-      <div class="col-md-8 dashboard-column">
+      <div class="col dashboard-column">
         <div class="dashboard-table-content">
-          <table id="example" class="table table-striped" style="width:100%">
-            <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Salary</th>
-            </tr>
-            </thead>
-            <tbody>
+          <div class="table-responsive">
+            <table id="example" class="table table-striped" style="width:100%">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Salary</th>
+              </tr>
+              </thead>
+              <tbody>
               <tr>
                 <td>Tiger Nixon</td>
                 <td>System Architect</td>
@@ -165,8 +158,9 @@
                 <td>Tokyo</td>
                 <td>$162,700</td>
               </tr>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
