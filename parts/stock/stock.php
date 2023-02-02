@@ -182,8 +182,8 @@ document.getElementById("stock-model-settings").addEventListener("click", event 
         {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
       request.send(function (status, responseText) {
         var result = JSON.parse(responseText);
-        openModelSettingsWindow(stock, result.buyModelPath, result.sellModelPath, result.reviewPeriod,
-          result.buyTradePredictionMinimum, result.sellTradePredictionMinimum);
+        openModelSettingsWindow(stock, result.buyModelPath, result.sellModelPath, result.buyReviewPeriod,
+          result.sellReviewPeriod, result.buyTradePredictionMinimum, result.sellTradePredictionMinimum);
       });
       return;
     }
@@ -195,23 +195,26 @@ function openModelAddWindow(stock) {
   openModelWindow(function () {
     let request = new HttpRequest("http://lukasbreuer.de:8080/model/add", "POST", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, buyModelPath: $("#model-buy-path").val(),
-        sellModelPath: $("#model-sell-path").val(), reviewPeriod: $("#model-review-period").val(),
-        buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(), sellTradePredictionMinimum: $("#model-sell-trade-prediction-minimum").val()});
+        sellModelPath: $("#model-sell-path").val(), buyReviewPeriod: $("#model-buy-review-period").val(),
+        sellReviewPeriod: $("#model-sell-review-period").val(), buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(),
+        sellTradePredictionMinimum: $("#model-sell-trade-prediction-minimum").val()});
     request.send(function (status, responseText) {swal("Added!", "You have successfully added that model!", "success")});
   });
 }
 
-function openModelSettingsWindow(stock, buyModelPath, sellModelPath, reviewPeriod, buyTradePredictionMinimum, sellTradePredictionMinimum) {
+function openModelSettingsWindow(stock, buyModelPath, sellModelPath, buyReviewPeriod, sellReviewPeriod, buyTradePredictionMinimum, sellTradePredictionMinimum) {
   window.sessionStorage.setItem("buyModelPath", buyModelPath);
   window.sessionStorage.setItem("sellModelPath", sellModelPath);
-  window.sessionStorage.setItem("reviewPeriod", reviewPeriod);
+  window.sessionStorage.setItem("buyReviewPeriod", buyReviewPeriod);
+  window.sessionStorage.setItem("sellReviewPeriod", sellReviewPeriod);
   window.sessionStorage.setItem("buyTradePredictionMinimum", buyTradePredictionMinimum);
   window.sessionStorage.setItem("sellTradePredictionMinimum", sellTradePredictionMinimum);
   openModelWindow(function () {
     let request = new HttpRequest("http://lukasbreuer.de:8080/model/update", "POST", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, buyModelPath: $("#model-buy-path").val(),
-        sellModelPath: $("#model-sell-path").val(), reviewPeriod: $("#model-review-period").val(),
-        buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(), sellTradePredictionMinimum: $("#model-sell-trade-prediction-minimum").val()});
+        sellModelPath: $("#model-sell-path").val(), buyReviewPeriod: $("#model-buy-review-period").val(),
+        sellReviewPeriod: $("#model-sell-review-period").val(), buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(),
+        sellTradePredictionMinimum: $("#model-sell-trade-prediction-minimum").val()});
     request.send(function (status, responseText) {swal("Adjusted!", "You have successfully adjusted that model!", "success")});
   });
 }
@@ -244,8 +247,9 @@ function openModelWindow(callback) {
 }
 
 function checkEmptyFields() {
-  return $("#model-buy-path").val() == "" || $("#model-sell-path").val() == "" || $("#model-review-period").val() == "" ||
-    $("#model-buy-trade-prediction-minimum").val() == "" || $("#model-sell-trade-prediction-minimum").val() == "";
+  return $("#model-buy-path").val() == "" || $("#model-sell-path").val() == "" || $("#model-buy-review-period").val() == "" ||
+    $("#model-sell-review-period").val() == "" || $("#model-buy-trade-prediction-minimum").val() == "" ||
+    $("#model-sell-trade-prediction-minimum").val() == "";
 }
 
 window.onbeforeunload = function (event) {
