@@ -9,6 +9,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'home')) { echo 'active'; }?>" aria-current="page" href="/home/">Home</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'dashboard')) { echo 'active'; }?>" href="/dashboard/">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'finances')) { echo 'active'; }?>" href="/finances/">Finances</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'portfolio')) { echo 'active'; }?>" href="/portfolio/">Portfolio</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trades')) { echo 'active'; }?>" href="/trades/">Trades</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'stock')) { echo 'active'; }?>" href="/stock/">Stock</a></li>

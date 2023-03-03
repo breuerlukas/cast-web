@@ -3,8 +3,10 @@
   <input id="model-buy-path" name="model-buy-path"></br></br>
   <a>Sell Model Path</a></br>
   <input id="model-sell-path" name="model-sell-path"></br></br>
-  <a>Review Period</a></br>
-  <input id="model-review-period" name="model-review-period"></br></br>
+  <a>Buy Review Period</a></br>
+  <input id="model-buy-review-period" name="model-buy-review-period"></br></br>
+  <a>Sell Review Period</a></br>
+  <input id="model-sell-review-period" name="model-sell-review-period"></br></br>
   <a>Buy Prediction Minimum</a></br>
   <input id="model-buy-trade-prediction-minimum" name="model-buy-trade-prediction-minimum"></br></br>
   <a>Sell Prediction Minimum</a></br>
@@ -21,9 +23,13 @@
       document.getElementById("model-sell-path").value = window.sessionStorage.getItem("sellModelPath");
       window.sessionStorage.removeItem("sellModelPath");
     }
-    if (window.sessionStorage.getItem("reviewPeriod") != null) {
-      document.getElementById("model-review-period").value = window.sessionStorage.getItem("reviewPeriod");
-      window.sessionStorage.removeItem("reviewPeriod");
+    if (window.sessionStorage.getItem("buyReviewPeriod") != null) {
+      document.getElementById("model-buy-review-period").value = window.sessionStorage.getItem("buyReviewPeriod");
+      window.sessionStorage.removeItem("buyReviewPeriod");
+    }
+    if (window.sessionStorage.getItem("sellReviewPeriod") != null) {
+      document.getElementById("model-sell-review-period").value = window.sessionStorage.getItem("sellReviewPeriod");
+      window.sessionStorage.removeItem("sellReviewPeriod");
     }
     if (window.sessionStorage.getItem("buyTradePredictionMinimum") != null) {
       document.getElementById("model-buy-trade-prediction-minimum").value = window.sessionStorage.getItem("buyTradePredictionMinimum");
