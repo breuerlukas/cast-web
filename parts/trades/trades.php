@@ -106,9 +106,9 @@
     var date = new Date(purchaseTime);
     var formattedDate = date.getDate().pad() + "." + (date.getMonth() + 1).pad() + "." + date.getFullYear().pad();
     appendCell(entry, "purchase-time", formattedDate, "span");
-    appendCell(entry, "purchase-price", purchasePrice.toFixed(3), "span");
-    appendCell(entry, "current-price", currentPrice.toFixed(3), "span");
-    var lossSpan = appendCell(entry, "profit-loss", profitLoss.toFixed(3), "span");
+    appendCell(entry, "purchase-price", purchasePrice.toFixed(2), "span");
+    appendCell(entry, "current-price", currentPrice.toFixed(2), "span");
+    var lossSpan = appendCell(entry, "profit-loss", profitLoss.toFixed(2), "span");
     if (profitLoss > 0) {
       lossSpan.classList.add("text-success");
     } else {
