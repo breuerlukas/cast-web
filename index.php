@@ -19,5 +19,5 @@
       }
       include("parts/index.php");
   };
-  $connection->process("http://lukasbreuer.de:8080/verification/isValid", json_encode(array("token" => $_COOKIE["token"])), array(), true, $callback);
+  $connection->process("https://lukasbreuer.de:8080/verification/isValid", json_encode(array("token" => $_COOKIE["token"])), array(), true, $callback);
 ?>

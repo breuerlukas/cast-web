@@ -60,7 +60,7 @@
   });
 
   function fetchTradeData(callback) {
-    let request = new HttpRequest("http://lukasbreuer.de:8080/trades/current", "GET", [{key: "Content-Type", value: "application/json"},
+    let request = new HttpRequest("https://lukasbreuer.de:8080/trades/current", "GET", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}]);
     request.send(function (status, responseText) {
       trades = JSON.parse(responseText).trades;

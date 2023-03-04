@@ -40,7 +40,7 @@ document.getElementById("password").addEventListener("keypress", function(event)
 });
 
 document.getElementById('login').onclick = function() {
-  let request = new HttpRequest("http://lukasbreuer.de:8080/verification/login", "POST", [{key: "Content-Type", value: "application/json"}],
+  let request = new HttpRequest("https://lukasbreuer.de:8080/verification/login", "POST", [{key: "Content-Type", value: "application/json"}],
     {username: document.getElementById("username").value, password: document.getElementById("password").value});
   request.send(function (status, responseText) {
     if (status == 200) {

@@ -34,7 +34,7 @@
     for (var i = 0; i < reviewPeriod; i++) {
       xValues[i] = i;
     }
-    let request = new HttpRequest("http://lukasbreuer.de:8080/stock/prices", "POST", [{key: "Content-Type", value: "application/json"},
+    let request = new HttpRequest("https://lukasbreuer.de:8080/stock/prices", "POST", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, reviewPeriod: reviewPeriod + ""});
     request.send(function (priceStatus, priceResponse) {
       var prices = JSON.parse(priceResponse).prices;

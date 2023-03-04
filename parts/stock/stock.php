@@ -44,13 +44,13 @@ function display(stock, reviewPeriod) {
   for (var i = 0; i < reviewPeriod; i++) {
     xValues[i] = i;
   }
-  let request = new HttpRequest("http://lukasbreuer.de:8080/stock/prices", "POST", [{key: "Content-Type", value: "application/json"},
+  let request = new HttpRequest("https://lukasbreuer.de:8080/stock/prices", "POST", [{key: "Content-Type", value: "application/json"},
     {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, reviewPeriod: reviewPeriod + ""});
   request.send(function (priceStatus, priceResponse) {
-    let request = new HttpRequest("http://lukasbreuer.de:8080/stock/predictions", "POST", [{key: "Content-Type", value: "application/json"},
+    let request = new HttpRequest("https://lukasbreuer.de:8080/stock/predictions", "POST", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, reviewPeriod: reviewPeriod + ""});
     request.send(function (predictionStatus, predictionResponse) {
-      let request = new HttpRequest("http://lukasbreuer.de:8080/trades/latest", "POST", [{key: "Content-Type", value: "application/json"},
+      let request = new HttpRequest("https://lukasbreuer.de:8080/trades/latest", "POST", [{key: "Content-Type", value: "application/json"},
         {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
       request.send(function (latestTradesStatus, latestTradesResponse) {
         var prices = JSON.parse(priceResponse).prices;
@@ -173,12 +173,12 @@ function drawGraph(chartElement, title, xValues, yValues, lines) {
 
 document.getElementById("stock-model-settings").addEventListener("click", event => {
   var stock = window.sessionStorage.getItem("stock").toUpperCase();
-  let request = new HttpRequest("http://lukasbreuer.de:8080/model/exists", "POST", [{key: "Content-Type", value: "application/json"},
+  let request = new HttpRequest("https://lukasbreuer.de:8080/model/exists", "POST", [{key: "Content-Type", value: "application/json"},
     {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
   request.send(function (status, responseText) {
     var exists = JSON.parse(responseText).exists;
     if (exists) {
-      let request = new HttpRequest("http://lukasbreuer.de:8080/model/find", "POST", [{key: "Content-Type", value: "application/json"},
+      let request = new HttpRequest("https://lukasbreuer.de:8080/model/find", "POST", [{key: "Content-Type", value: "application/json"},
         {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
       request.send(function (status, responseText) {
         var result = JSON.parse(responseText);
@@ -193,7 +193,7 @@ document.getElementById("stock-model-settings").addEventListener("click", event 
 
 function openModelAddWindow(stock) {
   openModelWindow(function () {
-    let request = new HttpRequest("http://lukasbreuer.de:8080/model/add", "POST", [{key: "Content-Type", value: "application/json"},
+    let request = new HttpRequest("https://lukasbreuer.de:8080/model/add", "POST", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, buyModelPath: $("#model-buy-path").val(),
         sellModelPath: $("#model-sell-path").val(), buyReviewPeriod: $("#model-buy-review-period").val(),
         sellReviewPeriod: $("#model-sell-review-period").val(), buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(),
@@ -210,7 +210,7 @@ function openModelSettingsWindow(stock, buyModelPath, sellModelPath, buyReviewPe
   window.sessionStorage.setItem("buyTradePredictionMinimum", buyTradePredictionMinimum);
   window.sessionStorage.setItem("sellTradePredictionMinimum", sellTradePredictionMinimum);
   openModelWindow(function () {
-    let request = new HttpRequest("http://lukasbreuer.de:8080/model/update", "POST", [{key: "Content-Type", value: "application/json"},
+    let request = new HttpRequest("https://lukasbreuer.de:8080/model/update", "POST", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}], {stock: stock, buyModelPath: $("#model-buy-path").val(),
         sellModelPath: $("#model-sell-path").val(), buyReviewPeriod: $("#model-buy-review-period").val(),
         sellReviewPeriod: $("#model-sell-review-period").val(), buyTradePredictionMinimum: $("#model-buy-trade-prediction-minimum").val(),

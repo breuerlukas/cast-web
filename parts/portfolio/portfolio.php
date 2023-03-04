@@ -51,7 +51,7 @@
   });
 
   function fetchPortfolioData(callback) {
-    let request = new HttpRequest("http://lukasbreuer.de:8080/portfolio", "GET", [{key: "Content-Type", value: "application/json"},
+    let request = new HttpRequest("https://lukasbreuer.de:8080/portfolio", "GET", [{key: "Content-Type", value: "application/json"},
       {key: "API-KEY", value: Cookie.find("token")}]);
     request.send(function (status, responseText) {
       fetchTradeData(callback, JSON.parse(responseText).portfolio);
@@ -62,7 +62,7 @@
     var trades = new Map();
     for (let i = 0; i < portfolioData.length; i++) {
       let stock = portfolioData[i].stock;
-      let request = new HttpRequest("http://lukasbreuer.de:8080/trades", "POST", [{key: "Content-Type", value: "application/json"},
+      let request = new HttpRequest("https://lukasbreuer.de:8080/trades", "POST", [{key: "Content-Type", value: "application/json"},
         {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
       request.send(function (status, responseText) {
         var tradeCount = JSON.parse(responseText).trades.length;
@@ -190,7 +190,7 @@
           });
           return;
         }
-        let request = new HttpRequest("http://lukasbreuer.de:8080/portfolio/add", "POST", [{key: "Content-Type", value: "application/json"},
+        let request = new HttpRequest("https://lukasbreuer.de:8080/portfolio/add", "POST", [{key: "Content-Type", value: "application/json"},
           {key: "API-KEY", value: Cookie.find("token")}], {stockName: $("#portfolio-stock").val()});
         request.send(function (status, responseText) {swal("Added!", "You have successfully added that stock to the portfolio!", "success").then(success => displayPortfolio());});
       }
@@ -221,7 +221,7 @@
           buttons: true,
         }).then(willDelete => {
           if (willDelete) {
-            let request = new HttpRequest("http://lukasbreuer.de:8080/portfolio/remove", "POST", [{key: "Content-Type", value: "application/json"},
+            let request = new HttpRequest("https://lukasbreuer.de:8080/portfolio/remove", "POST", [{key: "Content-Type", value: "application/json"},
               {key: "API-KEY", value: Cookie.find("token")}], {stockId: stockId});
             request.send(function (status, responseText) {});
             swal("Deleted!", "That stock has been successfully deleted!", "success").then(success => location.reload());
@@ -237,7 +237,7 @@
           });
           return;
         }
-        let request = new HttpRequest("http://lukasbreuer.de:8080/portfolio/update", "POST", [{key: "Content-Type", value: "application/json"},
+        let request = new HttpRequest("https://lukasbreuer.de:8080/portfolio/update", "POST", [{key: "Content-Type", value: "application/json"},
           {key: "API-KEY", value: Cookie.find("token")}], {stockId: stockId, stockName: $("#portfolio-stock").val()});
         request.send(function (status, responseText) {swal("Adjusted!", "You have successfully adjusted that stock!", "success").then(success => displayPortfolio());});
       }
