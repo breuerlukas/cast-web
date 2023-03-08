@@ -192,7 +192,7 @@
         }
         let request = new HttpRequest("https://lukasbreuer.de:8080/portfolio/add", "POST", [{key: "Content-Type", value: "application/json"},
           {key: "API-KEY", value: Cookie.find("token")}], {stockName: $("#portfolio-stock").val()});
-        request.send(function (status, responseText) {swal("Added!", "You have successfully added that stock to the portfolio!", "success").then(success => displayPortfolio());});
+        request.send(function (status, responseText) {swal("Added!", "You have successfully added that stock to the portfolio!", "success").then(success => location.reload());});
       }
     });
   });
@@ -239,7 +239,7 @@
         }
         let request = new HttpRequest("https://lukasbreuer.de:8080/portfolio/update", "POST", [{key: "Content-Type", value: "application/json"},
           {key: "API-KEY", value: Cookie.find("token")}], {stockId: stockId, stockName: $("#portfolio-stock").val()});
-        request.send(function (status, responseText) {swal("Adjusted!", "You have successfully adjusted that stock!", "success").then(success => displayPortfolio());});
+        request.send(function (status, responseText) {swal("Adjusted!", "You have successfully adjusted that stock!", "success").then(success => location.reload());});
       }
     });
   }
