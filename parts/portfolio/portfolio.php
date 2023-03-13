@@ -11,12 +11,12 @@
   <ul id="portfolio-table-description">
     <li>
       <div>
-        <span>Stock</span> <button id="portfolio-filter-stock" class="portfolio-filter"><span class="fa fa-sort"></span></button>
+        <span>Stock</span> <button id="portfolio-filter-stock" class="portfolio-filter"><span class="fa-solid fa-sort"></span></button>
       </div>
     </li>
     <li>
       <div>
-        <span>Trades</span> <button id="portfolio-filter-trades" class="portfolio-filter"><span class="fa fa-sort"></span></button>
+        <span>Trades</span> <button id="portfolio-filter-trades" class="portfolio-filter"><span class="fa-solid fa-sort"></span></button>
       </div>
     </li>
     <li>
@@ -144,16 +144,18 @@
     if (currentFilter === filter) {
       currentFilterDirection = !currentFilterDirection;
       if (currentFilterDirection) {
-        currentFilterIcon.classList.add("fa-sort-desc");
-        currentFilterIcon.classList.remove("fa-sort-asc");
+        currentFilterIcon.classList.add("fa-sort-down");
+        currentFilterIcon.classList.remove("fa-sort-up");
+        currentFilterIcon.classList.remove("fa-sort");
       } else {
-        currentFilterIcon.classList.remove("fa-sort-desc");
-        currentFilterIcon.classList.add("fa-sort-asc");
+        currentFilterIcon.classList.remove("fa-sort-down");
+        currentFilterIcon.classList.add("fa-sort-up");
+        currentFilterIcon.classList.remove("fa-sort");
       }
     } else {
       if (currentFilterIcon != null) {
-        currentFilterIcon.classList.remove("fa-sort-asc");
-        currentFilterIcon.classList.remove("fa-sort-desc");
+        currentFilterIcon.classList.remove("fa-sort-up");
+        currentFilterIcon.classList.remove("fa-sort-down");
         currentFilterIcon.classList.add("fa-sort");
       }
       currentFilter = filter;
