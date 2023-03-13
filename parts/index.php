@@ -1,5 +1,5 @@
 <?php
-  $uri = $_SERVER['REQUEST_URI'];
+  $uri = explode("?", $_SERVER['REQUEST_URI'])[0];
   if (str_replace("/", "", $uri) == "") {
     header("Location: /home/");
     die();
