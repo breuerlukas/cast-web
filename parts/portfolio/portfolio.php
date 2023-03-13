@@ -104,8 +104,7 @@
       if (targetClasses.contains("portfolio-settings") || targetClasses.contains("fa")) {
         return;
       }
-      window.sessionStorage.setItem("stock", stockName);
-      window.location.href = "/stock/";
+      window.location.href = "/stock?name=" + stockName;
     });
     appendCell(entry, "stock", stockName, "span");
     appendCell(entry, "trades", stockTrades, "span");

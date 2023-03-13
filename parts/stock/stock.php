@@ -19,8 +19,9 @@
 const REVIEW_PERIOD = 365;
 
 $(document).ready(function() {
-  if (window.sessionStorage.getItem("stock") != null) {
-    display(window.sessionStorage.getItem("stock"), REVIEW_PERIOD);
+  var urlParameter = new URLSearchParams(window.location.search);
+  if (urlParameter.has("name")) {
+    display(urlParameter.get("name"), REVIEW_PERIOD);
   }
 });
 
@@ -33,8 +34,7 @@ document.getElementById("stock-search-input").addEventListener("keypress", funct
 
 document.getElementById("stock-search-button").onclick = function() {
   var searchValue = document.getElementById("stock-search-input").value;
-  window.sessionStorage.setItem("stock", searchValue);
-  display(searchValue, REVIEW_PERIOD);
+  window.location.href = "/stock?name=" + searchValue;
 }
 
 function display(stock, reviewPeriod) {
@@ -251,8 +251,4 @@ function checkEmptyFields() {
     $("#model-sell-review-period").val() == "" || $("#model-buy-trade-prediction-minimum").val() == "" ||
     $("#model-sell-trade-prediction-minimum").val() == "";
 }
-
-window.onbeforeunload = function (event) {
-  window.sessionStorage.removeItem("stock");
-};
 </script>
