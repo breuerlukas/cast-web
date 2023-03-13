@@ -10,27 +10,32 @@
   <ul id="trade-table-description">
     <li>
       <div>
-        <span>Stock</span> <button id="trade-filter-stock" class="trade-filter"><span class="fa fa-sort"></span></button>
+        <span>Stock</span> <button id="trade-filter-stock" class="trade-filter"><span class="fa-solid fa-sort"></span></button>
       </div>
     </li>
     <li>
       <div>
-        <span>Purchase Time</span> <button id="trade-filter-purchase-time" class="trade-filter"><span class="fa fa-sort"></span></button>
+        <span>Purchase Time</span> <button id="trade-filter-purchase-time" class="trade-filter"><span class="fa-solid fa-sort"></span></button>
       </div>
     </li>
     <li>
       <div>
-        <span>Purchase Price</span> <button id="trade-filter-purchase-price" class="trade-filter"><span class="fa fa-sort"></span></button>
+        <span>Purchase Price</span> <button id="trade-filter-purchase-price" class="trade-filter"><span class="fa-solid fa-sort"></span></button>
       </div>
     </li>
     <li>
       <div>
-        <span>Current Price</span> <button id="trade-filter-current-price" class="trade-filter"><span class="fa fa-sort"></span></button>
+        <span>Current Price</span> <button id="trade-filter-current-price" class="trade-filter"><span class="fa-solid fa-sort"></span></button>
       </div>
     </li>
     <li>
       <div>
-        <span>Profit / Loss</span> <button id="trade-filter-profit-loss" class="trade-filter"><span class="fa fa-sort"></span></button>
+        <span>Profit / Loss</span> <button id="trade-filter-profit-loss" class="trade-filter"><span class="fa-solid fa-sort"></span></button>
+      </div>
+    </li>
+    <li>
+      <div>
+        <span>Today's Profit / Loss</span> <button id="trade-filter-today-profit-loss" class="trade-filter"><span class="fa-solid fa-sort"></span></button>
       </div>
     </li>
   </ul>
@@ -70,6 +75,7 @@
         trade.tradePrice = parseFloat(trade.tradePrice);
         trade.currentPrice = parseFloat(trade.currentPrice);
         trade.profitLoss = trade.currentPrice - trade.tradePrice;
+        trade.todayProfitLoss = trade.currentPrice - trade.yesterdaysPrice;
       }
       callback();
     });
@@ -86,7 +92,8 @@
       if(!entry.stock.toLowerCase().startsWith(currentNameFilter.toLowerCase())) {
           continue;
       }
-      displayTrade(entry.id, entry.stock, entry.tradeTime, entry.tradePrice, entry.currentPrice, entry.profitLoss);
+      displayTrade(entry.id, entry.stock, entry.tradeTime, entry.tradePrice, entry.currentPrice, entry.profitLoss,
+        entry.todayProfitLoss);
     }
   }
 
@@ -96,7 +103,7 @@
     };
   }
 
-  function displayTrade(tradeId, stockName, purchaseTime, purchasePrice, currentPrice, profitLoss) {
+  function displayTrade(tradeId, stockName, purchaseTime, purchasePrice, currentPrice, profitLoss, todayProfitLoss) {
     var entry = document.createElement('li');
     entry.addEventListener("click", event => {
       window.location.href = "/stock?name=" + stockName;
@@ -107,11 +114,17 @@
     appendCell(entry, "purchase-time", formattedDate, "span");
     appendCell(entry, "purchase-price", purchasePrice.toFixed(2), "span");
     appendCell(entry, "current-price", currentPrice.toFixed(2), "span");
-    var lossSpan = appendCell(entry, "profit-loss", profitLoss.toFixed(2), "span");
+    var profitLossSpan = appendCell(entry, "profit-loss", profitLoss.toFixed(2), "span");
     if (profitLoss > 0) {
-      lossSpan.classList.add("text-success");
+      profitLossSpan.classList.add("text-success");
     } else {
-      lossSpan.classList.add("text-danger");
+      profitLossSpan.classList.add("text-danger");
+    }
+    var todayProfitLossSpan = appendCell(entry, "today-profit-loss", todayProfitLoss.toFixed(2), "span");
+    if (todayProfitLoss > 0) {
+      todayProfitLossSpan.classList.add("text-success");
+    } else {
+      todayProfitLossSpan.classList.add("text-danger");
     }
     document.getElementById("trade-list").appendChild(entry);
   }
@@ -136,6 +149,7 @@
     registerFilter("tradePrice", "purchase-price");
     registerFilter("currentPrice", "current-price");
     registerFilter("profitLoss", "profit-loss");
+    registerFilter("todayProfitLoss", "today-profit-loss");
   }
 
   function registerFilter(variableName, elementName) {
@@ -149,16 +163,18 @@
     if (currentFilter === filter) {
       currentFilterDirection = !currentFilterDirection;
       if (currentFilterDirection) {
-        currentFilterIcon.classList.add("fa-sort-desc");
-        currentFilterIcon.classList.remove("fa-sort-asc");
+        currentFilterIcon.classList.add("fa-sort-down");
+        currentFilterIcon.classList.remove("fa-sort-up");
+        currentFilterIcon.classList.remove("fa-sort");
       } else {
-        currentFilterIcon.classList.remove("fa-sort-desc");
-        currentFilterIcon.classList.add("fa-sort-asc");
+        currentFilterIcon.classList.remove("fa-sort-down");
+        currentFilterIcon.classList.add("fa-sort-up");
+        currentFilterIcon.classList.remove("fa-sort");
       }
     } else {
       if (currentFilterIcon != null) {
-        currentFilterIcon.classList.remove("fa-sort-asc");
-        currentFilterIcon.classList.remove("fa-sort-desc");
+        currentFilterIcon.classList.remove("fa-sort-up");
+        currentFilterIcon.classList.remove("fa-sort-down");
         currentFilterIcon.classList.add("fa-sort");
       }
       currentFilter = filter;
