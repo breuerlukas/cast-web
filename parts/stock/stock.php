@@ -7,7 +7,11 @@
   </div>
   <div id="stock-headline-wrapper">
     <h2 id="stock-chart-headline"></h2>
-    <button id="stock-model-settings"><i id="stock-model-settings-icon"></i></button>
+    <div id="stock-headline-right">
+      <button type="button" id="stock-yahoo" class="btn btn-primary btn-block"><span>YAHOO</span></button>
+      <span style="font-size: 20px">&nbsp</span>
+      <button id="stock-model-settings"><i id="stock-model-settings-icon"></i></button>
+    </div>
   </div>
   <div id="stock-chart-wrapper">
   </div>
@@ -59,6 +63,7 @@ function display(stock, reviewPeriod) {
         document.getElementById("stock-wrapper").removeChild(document.getElementById("stock-chart-loader"));
         document.getElementById("stock-chart-headline").innerHTML = "Prices / Predictions";
         document.getElementById("stock-model-settings-icon").classList.add("fa", "fa-gear");
+        document.getElementById("stock-yahoo").style.opacity = 1;
         if (predictionStatus != 404) {
           var predictions = JSON.parse(predictionResponse).predictions;
           displayPredictionCanvas(xValues, predictions);
@@ -95,6 +100,7 @@ function resetContent() {
   predictionChartWrapper.setAttribute("style", "height: 0");
   document.getElementById("stock-chart-headline").innerHTML = "";
   document.getElementById("stock-model-settings-icon").classList.remove("fa", "fa-gear");
+  document.getElementById("stock-yahoo").style.opacity = 0;
 }
 
 function displayLoader() {
@@ -171,8 +177,12 @@ function drawGraph(chartElement, title, xValues, yValues, lines) {
   return chart;
 }
 
+document.getElementById("stock-yahoo").addEventListener("click", event => {
+  window.open("https://finance.yahoo.com/chart/" + new URLSearchParams(window.location.search).get("name"), '_blank').focus();
+});
+
 document.getElementById("stock-model-settings").addEventListener("click", event => {
-  var stock = window.sessionStorage.getItem("stock").toUpperCase();
+  var stock = new URLSearchParams(window.location.search).get("name").toUpperCase();
   let request = new HttpRequest("https://lukasbreuer.de:8080/model/exists", "POST", [{key: "Content-Type", value: "application/json"},
     {key: "API-KEY", value: Cookie.find("token")}], {stock: stock});
   request.send(function (status, responseText) {
