@@ -61,7 +61,7 @@ body {
 }
 
 #stock-yahoo {
-
+  opacity: 0;
 }
 
 #stock-model-settings {
