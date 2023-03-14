@@ -3,7 +3,7 @@ body {
 }
 
 #trade-header {
-  width: min(calc(1500px - 15vw), 90%);
+  width: min(calc(1500px - 15vw), 95%);
   margin: auto;
   margin-top: 3%;
   display: flex;
@@ -50,17 +50,13 @@ body {
     margin-bottom: 5%;
   }
 
-  #trade-search-box {
-    width: 70%;
-  }
-
   .trade-list-stock {
     font-size: 3.5vw;
   }
 }
 
 #trade-list {
-  width: min(calc(1500px - 15vw), 90%);
+  width: min(calc(1500px - 15vw), 95%);
   position: relative;
   list-style-type: none;
   padding: 0;
@@ -90,7 +86,7 @@ body {
 }
 
 #trade-table-description {
-  width: min(calc(1500px - 15vw), 90%);
+  width: min(calc(1500px - 15vw), 95%);
   position: relative;
   list-style-type: none;
   margin: auto;
@@ -120,6 +116,10 @@ body {
 
 @media (max-width: 400px) {
   #trade-table-description li {
+    font-size: .8em;
+  }
+
+  #trade-list li div span {
     font-size: .8em;
   }
 }
