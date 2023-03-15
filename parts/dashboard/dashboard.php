@@ -107,64 +107,6 @@
       </div>
     </div>
   </div>
-  <div class="container pt-2">
-    <div class="row justify-content-between">
-      <div class="col dashboard-column">
-        <div class="dashboard-table-content">
-          <div class="table-responsive">
-            <table id="example" class="table table-striped" style="width:100%">
-              <thead>
-              <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Salary</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>$320,800</td>
-              </tr>
-              <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>$170,750</td>
-              </tr>
-              <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>$86,000</td>
-              </tr>
-              <tr>
-                <td>Cedric Kelly</td>
-                <td>Senior Javascript Developer</td>
-                <td>Edinburgh</td>
-                <td>$433,060</td>
-              </tr>
-              <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>$162,700</td>
-              </tr>
-              <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>$162,700</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -172,7 +114,6 @@
     drawLineChart("dashboard-profit-line-chart", "Prices", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     drawDoughnutChart("dashboard-profit-doughnut-chart", "Profit / Loss", ["Profit", "Loss", "Neutral"], [80, 18, 2], ["#aaff2a", "#ff5959", "#bcbcbc"]);
     drawDoughnutChart("dashboard-portfolio-doughnut-chart", "Profit / Loss", ["Profit", "Loss", "Neutral"], [80, 18, 2], ["#aaff2a", "#ff5959", "#bcbcbc"]);
-    $('#example').DataTable({searching: false, info: false, lengthChange: false, pageLength: 5});
   });
 
   function drawLineChart(chartElement, title, xValues, yValues) {

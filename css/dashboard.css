@@ -1,7 +1,3 @@
-body {
-  background-color: #0d1117 !important;
-}
-
 @media (min-width: 1400px) {
   .container {
     max-width: 80% !important;
@@ -120,57 +116,4 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-#example_wrapper {
-  background: #1b232f;
-  color: white;
-  border: transparent 1px solid;
-  border-radius: .5rem;
-}
-
-#example {
-  background-color: #1b232f;
-  color: white;
-}
-
-.dataTables_length select, .dataTables_length select option {
-  color: white !important;
-}
-
-.dataTables_length select option {
-  background-color: #12171e;
-}
-
-table {
-  border-collapse: collapse !important;
-  border-color: transparent !important;
-}
-
-th {
-  padding: 1.5rem !important;
-}
-
-td, th {
-  border-color: transparent !important;
-}
-
-td {
-  color: white !important;
-  padding: 1.5rem !important;
-}
-
-.dataTables_paginate {
-  width: 100%;
-  text-align: center !important;
-}
-
-.paginate_button:hover {
-  border-color: transparent !important;
-  background: none !important;
-  background: #2c3a4d !important;
-}
-
-.current {
-  background: rgba(78, 98, 123, 0.75) none !important;
 }
