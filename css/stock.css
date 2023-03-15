@@ -1,7 +1,3 @@
-body {
-  background-color: #0d1117 !important;
-}
-
 #stock-wrapper {
   margin: auto;
   width: min(calc(1500px - 15vw), 95%);

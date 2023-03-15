@@ -1,7 +1,3 @@
-body {
-  background-color: #0d1117 !important;
-}
-
 #trade-header {
   width: min(calc(1500px - 15vw), 95%);
   margin: auto;

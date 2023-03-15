@@ -1,7 +1,3 @@
-body {
-  background-color: #0d1117 !important;
-}
-
 #portfolio-header {
   width: min(calc(1500px - 15vw), 90%);
   margin: auto;
