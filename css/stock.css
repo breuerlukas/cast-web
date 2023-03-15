@@ -54,7 +54,6 @@ body {
 }
 
 #stock-headline-right {
-  display: flex;
   float: right;
   height: 2.5em;
   line-height: 2.5em;
