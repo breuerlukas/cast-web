@@ -21,6 +21,7 @@
             <a class="dropdown-item" href="/train/execution">Execution</a>
           </div>
         </li>
+        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'tends')) { echo 'active'; }?>" href="/trends/">Trends</a></li>
       </ul>
     </div>
   </div>

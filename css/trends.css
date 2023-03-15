@@ -1,0 +1,71 @@
+#example_wrapper {
+  background: #191d27;
+  color: white;
+  border: transparent 1px solid;
+  border-radius: .5rem;
+}
+
+#example {
+  background-color: #191d27;
+  color: white;
+}
+
+.dataTables_length select, .dataTables_length select option {
+  color: white !important;
+}
+
+.dataTables_length select option {
+  background-color: #12171e;
+}
+
+table {
+  border-collapse: collapse !important;
+  border-color: transparent !important;
+}
+
+th {
+  padding: 1.5rem !important;
+}
+
+td, th {
+  border-color: #343d4c !important;
+}
+
+td {
+  color: white !important;
+  padding: 1.5rem !important;
+}
+
+.dataTables_paginate {
+  width: 100%;
+  text-align: center !important;
+}
+
+.paginate_button {
+  padding: .5em !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: .5rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.previous {
+  margin-right: 20px !important;
+}
+
+.next {
+  margin-left: 20px !important;
+}
+
+.paginate_button:hover {
+  border-color: transparent !important;
+  background: none !important;
+  background: #2c3a4d !important;
+}
+
+.current {
+  background: rgba(78, 98, 123, 0.75) none !important;
+}
