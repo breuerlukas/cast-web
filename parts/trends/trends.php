@@ -7,7 +7,7 @@
             <thead>
             <tr>
               <th>Name</th>
-              <th class="nosort">Position</th>
+              <th>Position</th>
               <th class="nosort">Office</th>
               <th class="nosort">Salary</th>
             </tr>

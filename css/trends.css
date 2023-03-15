@@ -69,3 +69,11 @@ td {
 .current {
   background: rgba(78, 98, 123, 0.75) none !important;
 }
+
+.sorting_desc::before {
+  opacity: 0 !important;
+}
+
+.sorting_asc::after {
+  opacity: 0 !important;
+}
