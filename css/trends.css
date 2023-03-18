@@ -3,11 +3,13 @@
   color: white;
   border: transparent 1px solid;
   border-radius: .5rem;
+  overflow-x: hidden;
 }
 
 #example {
   background-color: #191d27;
   color: white;
+  width: 100%;
 }
 
 .dataTables_length select, .dataTables_length select option {
@@ -70,10 +72,35 @@ td {
   background: rgba(78, 98, 123, 0.75) none !important;
 }
 
-.sorting_desc::before {
-  opacity: 0 !important;
+.sorting::before, .sorting::after {
+  font-size: 0.6em !important;
+  opacity: 30% !important;
 }
 
-.sorting_asc::after {
-  opacity: 0 !important;
+.sorting_desc::after, .sorting_asc::before {
+  opacity: 90% !important;
+}
+
+.trend-stock-status {
+  padding: .5em;
+  border-radius: .2rem !important;
+}
+
+.trend-stock-status-integrated {
+  color: rgba(0, 201, 167);
+  background-color: rgba(0, 201, 167, 0.12);
+}
+
+.trend-stock-status-pending {
+  color: rgb(210, 210, 210);
+  background-color: rgb(200, 200, 200, 0.12);
+}
+
+.trend-stock-options-icon {
+  padding: 1em;
+  margin: -1em;
+}
+
+.dropdown-divider {
+  background: #5d687d !important;
 }
