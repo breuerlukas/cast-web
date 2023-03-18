@@ -150,23 +150,6 @@ function drawGraph(chartElement, title, xValues, yValues, lines) {
         xAxes: [{gridLines: { color: "#131c2b" }}],
         yAxes: [{gridLines: { color: "#131c2b" }}]
       },
-      onClick: (e) => {
-        const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
-        var xAxis = chart.scales['x-axis-0'];
-        var yAxis = chart.scales['y-axis-0'];
-
-        // Substitute the appropriate scale IDs
-        const dataX = xAxis.getValueForPixel(canvasPosition.x);
-        console.log(dataX);
-        if (firstX === -1) {
-          firstX = dataX;
-          return;
-        }
-        var context = chart.ctx;
-        context.fillStyle = "rgba(0, 0, 0, 0.4)";
-        context.fillRect(xAxis.getPixelForValue(firstX), yAxis.getPixelForValue(yAxis.max),
-          xAxis.getPixelForValue(dataX - firstX), yAxis.getPixelForValue(0));
-      },
       elements: {
         point:{
           radius: 0
