@@ -12,6 +12,7 @@
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'finances')) { echo 'active'; }?>" href="/finances/">Finances</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'portfolio')) { echo 'active'; }?>" href="/portfolio/">Portfolio</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trades')) { echo 'active'; }?>" href="/trades/">Trades</a></li>
+        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trends')) { echo 'active'; }?>" href="/trends/">Trends</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'stock')) { echo 'active'; }?>" href="/stock/">Stock</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?php if(!strcmp($pageName, 'preset') || !strcmp($pageName, 'execution')) { echo 'active'; }?>"
@@ -21,7 +22,6 @@
             <a class="dropdown-item" href="/train/execution">Execution</a>
           </div>
         </li>
-        <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'tends')) { echo 'active'; }?>" href="/trends/">Trends</a></li>
       </ul>
     </div>
   </div>
