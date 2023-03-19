@@ -28,3 +28,23 @@ body::-webkit-scrollbar-thumb {
   font-family: Calibri;
   src: url("Calibri.ttf");
 }
+
+.swal-overlay {
+  background-color: rgba(44, 54, 70, 0.59);
+}
+
+.swal-modal {
+  background-color: #34435a;
+  border: 2px solid #35403e;
+}
+
+.swal-icon--success__hide-corners {
+  background: none !important;
+}
+.swal-icon--success:before, .swal-icon--success:after {
+  background: none !important;
+}
+
+.swal-title, .swal-text {
+  color: white;
+}
