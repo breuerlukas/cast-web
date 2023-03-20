@@ -95,7 +95,7 @@
     appendCell(entryElement, "td", "").appendChild(createStatusSpan(alreadyIntegrated));
     var dropdownElement = appendCell(entryElement, "td", "");
     dropdownElement.appendChild(createDropdownButton());
-    dropdownElement.appendChild(createDropdownList(symbol));
+    dropdownElement.appendChild(createDropdownList(symbol, website));
     table.appendChild(entryElement);
   }
 
@@ -129,11 +129,12 @@
     return dropdownSpan;
   }
 
-  function createDropdownList(symbol) {
+  function createDropdownList(symbol, website) {
     var dropdownList = document.createElement("ul");
     dropdownList.classList.add("dropdown-menu", "dropdown-menu-dark");
     dropdownList.setAttribute("aria-labelledby", "dropdown-menu-button");
     appendDropdownItem(dropdownList, "Investigate", event => investigateSymbol(symbol));
+    appendDropdownItem(dropdownList, "Visit", event => visitSymbol(website));
     appendDropdownDivider(dropdownList);
     appendDropdownItem(dropdownList, "Integrate", event => integrateSymbol(symbol));
     appendDropdownItem(dropdownList, "Remove", event => removeSymbol(symbol));
@@ -142,6 +143,10 @@
 
   function investigateSymbol(symbol) {
     window.location.href = "/stock?name=" + symbol
+  }
+
+  function visitSymbol(website) {
+    window.location.href = website;
   }
 
   function integrateSymbol(symbol) {
