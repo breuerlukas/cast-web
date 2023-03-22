@@ -1,22 +1,24 @@
-<div class="container pt-2">
-  <div class="row justify-content-between">
-    <div class="col">
-      <div class="table-responsive">
-        <table id="example" class="table dt-responsive nowrap">
-          <thead>
-          <tr>
-            <th data-priority="0">Symbol</th>
-            <th data-priority="0.5" class="nosort">Icon</th>
-            <th data-priority="0.3">Company</th>
-            <th data-priority="0.6">Industry</th>
-            <th data-priority="0.2">Price</th>
-            <th data-priority="0.4">Status</th>
-            <th data-priority="0.1" class="nosort"></th>
-          </tr>
-          </thead>
-          <tbody id="table-body">
-          </tbody>
-        </table>
+<div id="trends-wrapper">
+  <div class="container pt-2">
+    <div class="row justify-content-between">
+      <div class="col">
+        <div class="table-responsive">
+          <table id="trends_table" class="table dt-responsive nowrap">
+            <thead>
+            <tr>
+              <th data-priority="0">Symbol</th>
+              <th data-priority="0.5" class="nosort">Icon</th>
+              <th data-priority="0.3">Company</th>
+              <th data-priority="0.6">Industry</th>
+              <th data-priority="0.2">Price</th>
+              <th data-priority="0.4">Status</th>
+              <th data-priority="0.1" class="nosort"></th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -24,20 +26,37 @@
 
 <script>
   $(document).ready(function() {
+    displayLoader()
     updateTrends();
   });
 
   function updateTrends() {
     fetchPortfolioData(function (portfolio) {
       fetchTrendData(function (trends) {
+        removeLoader();
         displayTrends(trends, portfolio);
         initializeDatatable();
       });
     });
   }
 
+  function displayLoader() {
+    var table = document.getElementById("trends_table");
+    table.style.display = "none";
+    var loader = document.createElement("div");
+    loader.id = "trends-loader";
+    loader.classList.add("loader");
+    document.getElementById("trends-wrapper").appendChild(loader);
+  }
+
+  function removeLoader() {
+    document.getElementById("trends-wrapper").removeChild(document.getElementById("trends-loader"));
+    var table = document.getElementById("trends_table");
+    table.style.display = "inline";
+  }
+
   function initializeDatatable() {
-    $('#example').DataTable({responsive: true, colReorder: true, searching: false, info: false, lengthChange: false, pageLength: 5, asStripeClasses: [],
+    $('#trends_table').DataTable({responsive: true, colReorder: true, searching: false, info: false, lengthChange: false, pageLength: 5, asStripeClasses: [],
       language: {
         paginate: {
           previous: "<",

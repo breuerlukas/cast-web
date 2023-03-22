@@ -1,4 +1,4 @@
-#example_wrapper {
+#trends_table_wrapper {
   background: #191d27;
   color: white;
   border: transparent 1px solid;
@@ -6,7 +6,7 @@
   overflow-x: hidden;
 }
 
-#example {
+#trends_table {
   background-color: #191d27;
   color: white;
   width: 100%;
