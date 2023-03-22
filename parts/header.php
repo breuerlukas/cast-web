@@ -14,14 +14,6 @@
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trades')) { echo 'active'; }?>" href="/trades/">Trades</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'trends')) { echo 'active'; }?>" href="/trends/">Trends</a></li>
         <li class="nav-item"><a class="nav-link <?php if(!strcmp($pageName, 'stock')) { echo 'active'; }?>" href="/stock/">Stock</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?php if(!strcmp($pageName, 'preset') || !strcmp($pageName, 'execution')) { echo 'active'; }?>"
-             href="#" id="navbar-dropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Train</a>
-          <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbar-dropdown">
-            <a class="dropdown-item" href="/train/preset/">Preset</a>
-            <a class="dropdown-item" href="/train/execution">Execution</a>
-          </div>
-        </li>
       </ul>
     </div>
   </div>
